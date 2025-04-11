@@ -6,6 +6,9 @@ import BenefitsSection from '@/components/BenefitsSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import SecuritySection from '@/components/SecuritySection';
+import PricingSection from '@/components/PricingSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import RoadmapSection from '@/components/RoadmapSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
@@ -22,6 +25,9 @@ const IndexContent: React.FC = () => {
         <FeaturesSection />
         <HowItWorksSection />
         <SecuritySection />
+        <PricingSection />
+        <TestimonialsSection />
+        <RoadmapSection />
         <CTASection />
       </main>
       <Footer />
