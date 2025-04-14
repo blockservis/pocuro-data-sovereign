@@ -9,7 +9,206 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      blogs: {
+        Row: {
+          author: string
+          author_image: string | null
+          category: string
+          content: string
+          excerpt: string
+          featured_image: string
+          id: string
+          is_published: boolean
+          published_at: string
+          read_time: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          author_image?: string | null
+          category: string
+          content: string
+          excerpt: string
+          featured_image: string
+          id?: string
+          is_published?: boolean
+          published_at?: string
+          read_time: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          author_image?: string | null
+          category?: string
+          content?: string
+          excerpt?: string
+          featured_image?: string
+          id?: string
+          is_published?: boolean
+          published_at?: string
+          read_time?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      early_access_signups: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
+      faq_categories: {
+        Row: {
+          display_order: number
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          display_order?: number
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          display_order?: number
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      faq_items: {
+        Row: {
+          answer: string
+          category_id: string
+          display_order: number
+          id: string
+          question: string
+        }
+        Insert: {
+          answer: string
+          category_id: string
+          display_order?: number
+          id?: string
+          question: string
+        }
+        Update: {
+          answer?: string
+          category_id?: string
+          display_order?: number
+          id?: string
+          question?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "faq_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "faq_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      help_center_topics: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          topic: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id: string
+          name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_intents: {
+        Row: {
+          comments: string | null
+          contribution_type: string[]
+          created_at: string
+          email: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comments?: string | null
+          contribution_type: string[]
+          created_at?: string
+          email: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comments?: string | null
+          contribution_type?: string[]
+          created_at?: string
+          email?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

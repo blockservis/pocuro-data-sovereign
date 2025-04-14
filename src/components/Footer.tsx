@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Github, Shield } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@/components/ThemeProvider';
 
