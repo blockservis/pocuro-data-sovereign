@@ -1,9 +1,10 @@
-
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Github, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@/components/ThemeProvider';
 
 const Footer: React.FC = () => {
+  const { theme } = useTheme();
   const scrollToSection = (sectionId: string) => {
     // Check if we're on the home page
     if (window.location.pathname !== '/') {
@@ -23,7 +24,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <Shield className="h-8 w-8 text-pocuro-blue dark:text-pocuro-aqua-blue" />
+              <img 
+                src={theme === 'dark' ? "/lovable-uploads/b51bfe97-8e2b-4e28-96cd-b054392494f0.png" : "/lovable-uploads/37d086a4-c6cc-4a20-bbf6-f396cd5e9636.png"} 
+                alt="Pocuro Logo" 
+                className="h-10 w-auto"
+              />
               <span className="text-xl font-bold text-pocuro-charcoal dark:text-white">Pocuro</span>
             </Link>
             <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-4">
