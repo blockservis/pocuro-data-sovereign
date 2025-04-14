@@ -1,9 +1,12 @@
+
 import React, { useState } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link, useLocation } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from './ui/navigation-menu';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from './LanguageProvider';
 
 interface NavbarProps {
   toggleTheme: () => void;
@@ -14,6 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
   
   const scrollToSection = (sectionId: string) => {
     // If we're not on the home page, navigate to home first
@@ -54,11 +58,11 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                     to="/"
                     className="inline-flex items-center justify-center rounded-md text-sm font-medium text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue transition-colors px-4 py-2"
                   >
-                    Home
+                    {t('common.home')}
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">Product</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">{t('navbar.product')}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
                       <li className="col-span-1">
@@ -70,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Features</div>
+                          <div className="text-sm font-medium leading-none">{t('common.features')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Explore the powerful features of Pocuro
                           </p>
@@ -85,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">How It Works</div>
+                          <div className="text-sm font-medium leading-none">{t('navbar.howItWorks')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Learn how Pocuro protects your data
                           </p>
@@ -100,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Pricing</div>
+                          <div className="text-sm font-medium leading-none">{t('common.pricing')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             View our pricing plans and options
                           </p>
@@ -115,7 +119,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Testimonials</div>
+                          <div className="text-sm font-medium leading-none">{t('navbar.testimonials')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             What our users say about Pocuro
                           </p>
@@ -130,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Roadmap</div>
+                          <div className="text-sm font-medium leading-none">{t('navbar.roadmap')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             See what's coming next for Pocuro
                           </p>
@@ -140,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">Resources</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">{t('navbar.resources')}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
                       <li>
@@ -149,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          <div className="text-sm font-medium leading-none">Blog</div>
+                          <div className="text-sm font-medium leading-none">{t('common.blog')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Read our latest articles and updates
                           </p>
@@ -160,29 +164,29 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           to="/faq"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">FAQ</div>
+                          <div className="text-sm font-medium leading-none">{t('navbar.faq')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Answers to frequently asked questions
                           </p>
                         </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/privacy-guide"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Privacy Guide</div>
+                          <div className="text-sm font-medium leading-none">{t('navbar.privacyGuide')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Learn about our privacy-first approach
                           </p>
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <Link
                           to="/help-center"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Help Center</div>
+                          <div className="text-sm font-medium leading-none">{t('common.helpCenter')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Get help with your Pocuro account
                           </p>
@@ -192,7 +196,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">Company</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">{t('navbar.company')}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
                       <li>
@@ -200,29 +204,29 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           to="/about-us"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">About Us</div>
+                          <div className="text-sm font-medium leading-none">{t('common.aboutUs')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Learn about our mission and team
                           </p>
                         </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/careers"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Careers</div>
+                          <div className="text-sm font-medium leading-none">{t('common.careers')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Join our team of privacy advocates
                           </p>
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <Link
                           to="/privacy-policy"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Privacy Policy</div>
+                          <div className="text-sm font-medium leading-none">{t('common.privacyPolicy')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             How we protect your personal information
                           </p>
@@ -233,7 +237,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           to="/terms-of-service"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Terms of Service</div>
+                          <div className="text-sm font-medium leading-none">{t('common.termsOfService')}</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Legal terms for using our service
                           </p>
@@ -245,19 +249,23 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
               </NavigationMenuList>
             </NavigationMenu>
             
-            <Button variant="outline" size="icon" onClick={toggleTheme}>
-              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <Button variant="outline" size="icon" onClick={toggleTheme}>
+                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+            </div>
             
             <Button 
               className="bg-pocuro-blue hover:bg-opacity-90 text-white"
               onClick={handleGetEarlyAccess}
             >
-              Get Early Access
+              {t('common.getEarlyAccess')}
             </Button>
           </div>
         ) : (
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <Button variant="outline" size="icon" onClick={toggleTheme}>
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>

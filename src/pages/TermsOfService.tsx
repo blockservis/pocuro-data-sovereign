@@ -1,8 +1,8 @@
 
 import React from 'react';
+import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 
 const TermsOfServiceContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -11,99 +11,87 @@ const TermsOfServiceContent: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
-      <main className="flex-grow pt-24 px-4 pb-16">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Terms of Service</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-8">Last updated: April 14, 2025</p>
-          
-          <div className="prose prose-lg max-w-none dark:prose-invert mb-8">
-            <h2>1. Acceptance of Terms</h2>
-            <p>
-              By accessing or using Pocuro services, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our services.
-            </p>
-            
-            <h2>2. Description of Service</h2>
-            <p>
-              Pocuro provides a privacy-first personal resource planner that helps users organize their finances, documents, and schedule while keeping their data secure through local processing and encryption.
-            </p>
-            
-            <h2>3. Account Registration</h2>
-            <p>
-              To use certain features of our services, you may need to create an account. You are responsible for:
-            </p>
-            <ul>
-              <li>Providing accurate information during registration</li>
-              <li>Maintaining the security of your account credentials</li>
-              <li>All activities that occur under your account</li>
-            </ul>
-            
-            <h2>4. Privacy and Data Security</h2>
-            <p>
-              Our Privacy Policy, available at pocuro.com/privacy-policy, describes how we collect, use, and protect your information. By using Pocuro, you agree to the practices described in our Privacy Policy.
-            </p>
-            
-            <h2>5. User Responsibilities</h2>
-            <p>When using Pocuro, you agree not to:</p>
-            <ul>
-              <li>Violate any applicable laws or regulations</li>
-              <li>Infringe upon the rights of others</li>
-              <li>Attempt to gain unauthorized access to Pocuro services or systems</li>
-              <li>Use Pocuro for any harmful, fraudulent, or deceptive purpose</li>
-              <li>Interfere with the proper functioning of our services</li>
-            </ul>
-            
-            <h2>6. Intellectual Property</h2>
-            <p>
-              Pocuro and its associated logos, software, and documentation are owned by us and protected by intellectual property laws. We grant you a limited, non-exclusive, non-transferable license to use our services for personal or internal business purposes.
-            </p>
-            
-            <h2>7. Content Ownership</h2>
-            <p>
-              You retain all rights to your content stored in Pocuro. We do not claim ownership of your personal information or data.
-            </p>
-            
-            <h2>8. Service Modifications</h2>
-            <p>
-              We reserve the right to modify, suspend, or discontinue any part of our services at any time. We will provide reasonable notice of significant changes when possible.
-            </p>
-            
-            <h2>9. Subscription and Payments</h2>
-            <p>
-              If you subscribe to our premium services:
-            </p>
-            <ul>
-              <li>You agree to pay all applicable fees as described at the time of purchase</li>
-              <li>Subscription fees are charged at the beginning of each billing period</li>
-              <li>You can cancel your subscription at any time, effective at the end of the current billing period</li>
-              <li>Refunds are provided in accordance with our Refund Policy and applicable laws</li>
-            </ul>
-            
-            <h2>10. Limitation of Liability</h2>
-            <p>
-              To the maximum extent permitted by law, Pocuro shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services.
-            </p>
-            
-            <h2>11. Disclaimer of Warranties</h2>
-            <p>
-              Our services are provided "as is" without any warranty, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
-            </p>
-            
-            <h2>12. Governing Law</h2>
-            <p>
-              These Terms shall be governed by and construed in accordance with the laws of [Jurisdiction], without regard to its conflict of law principles.
-            </p>
-            
-            <h2>13. Changes to Terms</h2>
-            <p>
-              We may update these Terms from time to time. We will notify you of significant changes and obtain consent where required by law.
-            </p>
-            
-            <h2>14. Contact Information</h2>
-            <p>
-              If you have any questions about these Terms, please contact us at legal@pocuro.com.
+      <main className="flex-grow pt-24 pb-16">
+        {/* Hero section */}
+        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 text-white py-16 px-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
+            <p className="text-xl opacity-90 max-w-3xl mx-auto">
+              Please read these terms carefully before using Pocuro's services.
             </p>
           </div>
-        </div>
+        </section>
+        
+        {/* Content section */}
+        <section className="py-12 px-4">
+          <div className="max-w-4xl mx-auto bg-white dark:bg-pocuro-dark-slate shadow-md rounded-lg p-8">
+            <div className="prose prose-lg dark:prose-invert prose-blue max-w-none">
+              <h2>1. Introduction</h2>
+              <p>
+                Welcome to Pocuro ("Company", "we", "our", "us")! These Terms of Service ("Terms", "Terms of Service") govern your use of our website and services operated by Pocuro.
+              </p>
+              <p>
+                By accessing or using our services, you agree to be bound by these Terms. If you disagree with any part of the Terms, you may not access our services.
+              </p>
+              
+              <h2>2. Communications</h2>
+              <p>
+                By creating an account, you agree to receive communications from us, including but not limited to emails, texts, and push notifications. You can opt-out of non-essential communications.
+              </p>
+              
+              <h2>3. Privacy Policy</h2>
+              <p>
+                Our Privacy Policy, available at <a href="/privacy-policy" className="text-pocuro-blue dark:text-pocuro-aqua-blue hover:underline">Privacy Policy</a>, describes how we collect, use, and share your information. By using our services, you agree to our Privacy Policy.
+              </p>
+              
+              <h2>4. Accounts</h2>
+              <p>
+                When you create an account with us, you must provide information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of these Terms, which may result in immediate termination of your account.
+              </p>
+              <p>
+                You are responsible for safeguarding the password that you use to access our services and for any activities or actions under your password.
+              </p>
+              
+              <h2>5. Intellectual Property</h2>
+              <p>
+                Our services and their original content, features, and functionality are and will remain the exclusive property of Pocuro and its licensors. Our services are protected by copyright, trademark, and other laws.
+              </p>
+              
+              <h2>6. User-Generated Content</h2>
+              <p>
+                You retain all rights to the content you create, upload, or share through our services. By providing content to our services, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute your content in any medium and any format.
+              </p>
+              
+              <h2>7. Data Storage and Processing</h2>
+              <p>
+                Pocuro employs a "local-first" approach to data storage and processing. This means that most of your data is stored and processed locally on your device. However, some features may require data to be transmitted to and stored on our servers or third-party servers. By using our services, you consent to these data storage and processing practices.
+              </p>
+              
+              <h2>8. Termination</h2>
+              <p>
+                We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms.
+              </p>
+              <p>
+                Upon termination, your right to use our services will immediately cease. If you wish to terminate your account, you may simply discontinue using our services or contact us to request account deletion.
+              </p>
+              
+              <h2>9. Limitation of Liability</h2>
+              <p>
+                In no event shall Pocuro, its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use our services.
+              </p>
+              
+              <h2>10. Changes to Terms</h2>
+              <p>
+                We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect.
+              </p>
+              
+              <h2>11. Contact Us</h2>
+              <p>
+                If you have any questions about these Terms, please contact us at terms@pocuro.com.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
       
       <Footer />

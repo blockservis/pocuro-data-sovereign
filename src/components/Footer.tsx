@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -136,9 +137,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/privacy-guide"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   Privacy Guide
-                </a>
+                </Link>
               </li>
               <li>
                 <Link 
@@ -163,9 +167,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/careers"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   Careers
-                </a>
+                </Link>
               </li>
               <li>
                 <Link 

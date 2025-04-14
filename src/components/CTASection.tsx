@@ -1,81 +1,94 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, ArrowRight } from 'lucide-react';
-import { toast } from 'sonner';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-
-const formSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { useToast } from '@/components/ui/use-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { submitEarlyAccess } from '@/services/signupService';
 
 const CTASection: React.FC = () => {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-    },
-  });
-  
-  const onSubmit = (data: FormValues) => {
-    // Here we would normally connect to Supabase to store the email
-    console.log("Submitting email to database:", data.email);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
-    toast.success('Thank you for signing up! Check your inbox for more information.');
-    form.reset();
+    if (!email) {
+      toast({
+        variant: "destructive",
+        title: "Email required",
+        description: "Please enter your email address.",
+      });
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      navigate('/auth');
+    } catch (error) {
+      console.error('Error submitting early access:', error);
+      toast({
+        variant: "destructive",
+        title: "Submission failed",
+        description: "There was an error submitting your request. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
-  
+
   return (
-    <section className="py-20 px-4 md:px-8 bg-pocuro-blue text-white" id="cta-section">
+    <section className="py-20 px-4 md:px-8 bg-gradient-to-br from-pocuro-blue/10 to-pocuro-light-blue/10 dark:from-pocuro-dark-navy dark:to-pocuro-navy border-t border-pocuro-light-gray dark:border-pocuro-dark-slate" id="cta-section">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Ready to Own Your Data & Simplify Your Life?
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
+          Ready to Take Control of Your Digital Life?
         </h2>
-        <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
-          Get early access to Pocuro and be among the first to experience true data sovereignty.
+        <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto mb-8">
+          Join the waitlist for early access to Pocuro, the future of privacy-first personal resource planning.
         </p>
         
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <div className="relative flex-1">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-pocuro-slate-gray h-5 w-5" />
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Enter your email address"
-                            className="pl-10 w-full border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder:text-white/60 h-12"
-                            {...field}
-                          />
-                        </FormControl>
-                      </div>
-                      <FormMessage className="text-left text-white/80" />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              
-              <Button type="submit" className="h-12 px-6 bg-white text-pocuro-blue hover:bg-opacity-90 font-medium flex items-center gap-2">
-                Get Early Access <ArrowRight size={18} />
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            <Input
+              type="text"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="flex-1"
+            />
+            <Input
+              type="email"
+              placeholder="Your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1"
+              required
+            />
+          </div>
+          
+          <Button 
+            type="submit" 
+            className="w-full sm:w-auto bg-pocuro-blue hover:bg-opacity-90 text-white px-8"
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "Get Early Access"}
+          </Button>
+        </form>
         
-        <p className="text-sm mt-6 opacity-80">
-          After signup, you'll receive email tips and can schedule a hands-on demo.
+        <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray mt-6">
+          By signing up, you agree to our{' '}
+          <Link to="/terms-of-service" className="text-pocuro-blue dark:text-pocuro-aqua-blue hover:underline">
+            Terms of Service
+          </Link>{' '}
+          and{' '}
+          <Link to="/privacy-policy" className="text-pocuro-blue dark:text-pocuro-aqua-blue hover:underline">
+            Privacy Policy
+          </Link>
+          .
         </p>
       </div>
     </section>

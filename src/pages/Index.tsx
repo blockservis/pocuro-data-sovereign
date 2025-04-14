@@ -11,7 +11,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import RoadmapSection from '@/components/RoadmapSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
-import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
+import { useTheme } from '@/components/ThemeProvider';
 
 const IndexContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -35,12 +35,9 @@ const IndexContent: React.FC = () => {
   );
 };
 
+// The ThemeProvider is now included in App.tsx
 const Index: React.FC = () => {
-  return (
-    <ThemeProvider>
-      <IndexContent />
-    </ThemeProvider>
-  );
+  return <IndexContent />;
 };
 
 export default Index;

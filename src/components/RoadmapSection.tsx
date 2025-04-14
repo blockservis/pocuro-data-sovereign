@@ -1,39 +1,63 @@
 
 import React from 'react';
-import { Calendar, Flag, Rocket, Check } from 'lucide-react';
+import { Rocket, Users, TrendingUp, Lock, RefreshCw, Heart, FileText, Shield } from 'lucide-react';
 
 const roadmapItems = [
   {
     id: 1,
-    title: "Health Tracking Module",
-    description: "Privacy-focused health data tracking with local AI insights.",
+    title: "ERP Pilot Program",
+    description: "Invitation-only onboarding for early businesses ahead of our enterprise launch.",
     quarter: "Q2 2025",
     status: "planned",
-    icon: Calendar,
+    icon: Users,
   },
   {
     id: 2,
-    title: "Cross-Device Sync",
-    description: "Optional device synchronization with end-to-end encryption.",
-    quarter: "Q3 2025",
+    title: "PocuroBiz MVP Launch",
+    description: "Launching the ERP platform for small businesses with core modules and AI-powered automation.",
+    quarter: "End of Q2 2025",
     status: "planned",
-    icon: Rocket,
+    icon: TrendingUp,
   },
   {
     id: 3,
-    title: "Document Scanner Enhancement",
-    description: "Advanced document scanning with OCR and AI categorization.",
-    quarter: "Q4 2025",
+    title: "PocuroMe MVP Launch",
+    description: "Introducing our privacy-first personal planner with foundational modules and local-first AI.",
+    quarter: "End of Q3 2025",
     status: "planned",
-    icon: Flag,
+    icon: Lock,
   },
   {
     id: 4,
-    title: "Beta Launch",
-    description: "Initial release with core privacy features and basic modules.",
-    quarter: "Q1 2025",
-    status: "completed",
-    icon: Check,
+    title: "Cross-Device Sync",
+    description: "Optional syncing across your devices with full end-to-end encryption.",
+    quarter: "Q3 2025",
+    status: "planned",
+    icon: RefreshCw,
+  },
+  {
+    id: 5,
+    title: "Health Tracking Module",
+    description: "Privacy-focused wellness tracking, with insights powered by local AI.",
+    quarter: "Q4 2025",
+    status: "planned",
+    icon: Heart,
+  },
+  {
+    id: 6,
+    title: "Document Scanner Upgrade",
+    description: "Smarter document handling with AI categorization and OCR support.",
+    quarter: "Q4 2025",
+    status: "planned",
+    icon: FileText,
+  },
+  {
+    id: 7,
+    title: "Mobile & Desktop App",
+    description: "Progressive Web App first. Full desktop privacy suite comes with our secure Tauri build.",
+    quarter: "Post-MVP",
+    status: "planned",
+    icon: Shield,
   },
 ];
 
