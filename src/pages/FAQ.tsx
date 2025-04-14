@@ -6,21 +6,8 @@ import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
-
-interface FAQCategory {
-  id: string;
-  name: string;
-  slug: string;
-  display_order: number;
-}
-
-interface FAQItem {
-  id: string;
-  category_id: string;
-  question: string;
-  answer: string;
-  display_order: number;
-}
+import { FAQCategory, FAQItem } from '@/types/supabase';
+import { Link } from 'react-router-dom';
 
 const FAQContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -35,7 +22,7 @@ const FAQContent: React.FC = () => {
         setLoading(true);
         
         // Fetch categories
-        const { data: categoriesData, error: categoriesError } = await supabase
+        const { data: categoriesData, error: categoriesError } = await (supabase as any)
           .from('faq_categories')
           .select('*')
           .order('display_order', { ascending: true });
@@ -46,7 +33,7 @@ const FAQContent: React.FC = () => {
         }
         
         // Fetch FAQ items
-        const { data: itemsData, error: itemsError } = await supabase
+        const { data: itemsData, error: itemsError } = await (supabase as any)
           .from('faq_items')
           .select('*')
           .order('display_order', { ascending: true });
@@ -88,10 +75,10 @@ const FAQContent: React.FC = () => {
       <main className="flex-grow pt-24 px-4 pb-16">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Find answers to common questions about Pocuro's privacy-first approach and features.
             </p>
           </div>
@@ -113,10 +100,10 @@ const FAQContent: React.FC = () => {
                 <Accordion type="single" collapsible className="w-full">
                   {filteredItems.map((item, index) => (
                     <AccordionItem key={item.id} value={`item-${index}`}>
-                      <AccordionTrigger className="text-left font-medium text-pocuro-charcoal dark:text-white">
+                      <AccordionTrigger className="text-left font-medium text-gray-900 dark:text-white">
                         {item.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                      <AccordionContent className="text-gray-600 dark:text-gray-300">
                         {item.answer}
                       </AccordionContent>
                     </AccordionItem>
@@ -126,23 +113,23 @@ const FAQContent: React.FC = () => {
             </Tabs>
           )}
           
-          <div className="text-center mt-12 pt-8 border-t border-pocuro-light-gray dark:border-pocuro-dark-slate">
-            <h2 className="text-2xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
+          <div className="text-center mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
               Still have questions?
             </h2>
-            <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               If you couldn't find the answer you were looking for, our support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
-                href="/help-center" 
-                className="bg-pocuro-blue hover:bg-pocuro-blue/90 text-white px-6 py-3 rounded-md font-medium"
+              <Link 
+                to="/help-center" 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium"
               >
                 Visit Help Center
-              </a>
+              </Link>
               <a 
                 href="mailto:support@pocuro.com" 
-                className="bg-transparent border border-pocuro-blue text-pocuro-blue hover:bg-pocuro-blue/10 px-6 py-3 rounded-md font-medium"
+                className="bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-6 py-3 rounded-md font-medium"
               >
                 Contact Support
               </a>

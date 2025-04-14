@@ -1,25 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CalendarIcon, Clock, Tag, User } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  featured_image: string;
-  author: string;
-  category: string;
-  read_time: string;
-  published_at: string;
-}
+import { CalendarIcon, Clock, User } from 'lucide-react';
+import { fetchBlogPosts, fetchBlogCategories, BlogPost } from '@/services/blogService';
 
 const BlogContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -29,34 +18,27 @@ const BlogContent: React.FC = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    async function fetchBlogPosts() {
+    async function loadBlogData() {
       try {
         setLoading(true);
-        const { data, error } = await supabase
-          .from('blogs')
-          .select('*')
-          .order('published_at', { ascending: false });
+        const postsResponse = await fetchBlogPosts();
+        const categoriesResponse = await fetchBlogCategories();
         
-        if (error) {
-          console.error('Error fetching blog posts:', error);
-          return;
+        if (postsResponse.success) {
+          setPosts(postsResponse.data);
         }
         
-        if (data) {
-          setPosts(data as BlogPost[]);
-          
-          // Extract unique categories
-          const uniqueCategories = ['All', ...new Set(data.map(post => post.category))];
-          setCategories(uniqueCategories);
+        if (categoriesResponse.success) {
+          setCategories(categoriesResponse.data);
         }
       } catch (error) {
-        console.error('Error fetching blog posts:', error);
+        console.error('Error loading blog data:', error);
       } finally {
         setLoading(false);
       }
     }
     
-    fetchBlogPosts();
+    loadBlogData();
   }, []);
   
   const filteredPosts = activeCategory === "All" 
@@ -77,7 +59,7 @@ const BlogContent: React.FC = () => {
       
       <main className="flex-grow pt-24">
         {/* Hero section */}
-        <section className="bg-gradient-to-r from-pocuro-blue to-pocuro-blue/90 text-white py-16 px-4">
+        <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16 px-4">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Pocuro Blog</h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
@@ -87,7 +69,7 @@ const BlogContent: React.FC = () => {
         </section>
         
         {/* Blog posts */}
-        <section className="py-16 px-4 bg-pocuro-soft-white dark:bg-pocuro-deep-charcoal">
+        <section className="py-16 px-4 bg-white dark:bg-gray-900">
           <div className="max-w-6xl mx-auto">
             <Tabs defaultValue="All" className="mb-12">
               <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:flex flex-wrap gap-2 mb-8">
@@ -120,10 +102,10 @@ const BlogContent: React.FC = () => {
                         
                         <CardHeader>
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="text-xs px-2 py-1 bg-pocuro-blue/10 dark:bg-pocuro-blue/20 text-pocuro-blue rounded">
+                            <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded">
                               {post.category}
                             </span>
-                            <span className="text-xs text-pocuro-slate-gray dark:text-pocuro-cool-gray flex items-center">
+                            <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
                               <Clock size={12} className="mr-1" /> {post.read_time}
                             </span>
                           </div>
@@ -132,7 +114,7 @@ const BlogContent: React.FC = () => {
                         </CardHeader>
                         
                         <CardContent>
-                          <div className="flex items-center text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                             <User size={14} className="mr-1" />
                             <span>{post.author}</span>
                             <span className="mx-2">•</span>
@@ -142,16 +124,14 @@ const BlogContent: React.FC = () => {
                         </CardContent>
                         
                         <CardFooter>
-                          <Button 
-                            variant="ghost" 
-                            className="text-pocuro-blue hover:text-pocuro-blue/90 p-0"
-                            onClick={() => {
-                              // This would typically link to the full blog post
-                              console.log(`Reading blog post: ${post.slug}`);
-                            }}
-                          >
-                            Read More
-                          </Button>
+                          <Link to={`/blog/${post.slug}`}>
+                            <Button 
+                              variant="ghost" 
+                              className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 p-0"
+                            >
+                              Read More
+                            </Button>
+                          </Link>
                         </CardFooter>
                       </Card>
                     ))}

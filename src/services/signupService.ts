@@ -1,9 +1,10 @@
 
 import { supabase } from '@/integrations/supabase/client';
+import { EarlyAccessSignup } from '@/types/supabase';
 
 export async function submitEarlyAccess(email: string, name?: string) {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('early_access_signups')
       .insert([
         { email, name }

@@ -1,22 +1,13 @@
 
 import { supabase } from '@/integrations/supabase/client';
+import { Blog } from '@/types/supabase';
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  featured_image: string;
-  author: string;
-  category: string;
-  read_time: string;
-  published_at: string;
-}
+export type BlogPost = Blog;
 
 export async function fetchBlogPosts() {
   try {
-    const { data, error } = await supabase
+    // Use 'any' to override TypeScript's types for now
+    const { data, error } = await (supabase as any)
       .from('blogs')
       .select('*')
       .order('published_at', { ascending: false });
@@ -38,7 +29,7 @@ export async function fetchBlogPosts() {
 
 export async function fetchBlogPost(slug: string) {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('blogs')
       .select('*')
       .eq('slug', slug)
@@ -61,7 +52,7 @@ export async function fetchBlogPost(slug: string) {
 
 export async function fetchBlogCategories() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('blogs')
       .select('category');
     
@@ -70,7 +61,7 @@ export async function fetchBlogCategories() {
     }
     
     // Extract unique categories
-    const categories = ['All', ...new Set(data.map(item => item.category))];
+    const categories = ['All', ...new Set(data.map((item: any) => item.category))];
     
     return { success: true, data: categories };
   } catch (error) {

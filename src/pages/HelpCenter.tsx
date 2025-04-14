@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Send, Bot, User as UserIcon, Info } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { HelpCenterTopic } from '@/types/supabase';
 
 interface Message {
   id: string;
@@ -27,7 +28,7 @@ const HelpCenterContent: React.FC = () => {
       timestamp: new Date(),
     },
   ]);
-  const [topics, setTopics] = useState<{topic: string; content: string}[]>([]);
+  const [topics, setTopics] = useState<HelpCenterTopic[]>([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -35,9 +36,9 @@ const HelpCenterContent: React.FC = () => {
     // Fetch help center topics from Supabase
     async function fetchTopics() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from('help_center_topics')
-          .select('topic, content');
+          .select('*');
         
         if (error) {
           console.error('Error fetching help topics:', error);
@@ -45,7 +46,7 @@ const HelpCenterContent: React.FC = () => {
         }
         
         if (data) {
-          setTopics(data);
+          setTopics(data as HelpCenterTopic[]);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -112,15 +113,15 @@ const HelpCenterContent: React.FC = () => {
       <main className="flex-grow pt-24 px-4 pb-16">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-pocuro-charcoal dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">
               Pocuro Help Center
             </h1>
-            <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Get instant answers to your questions about Pocuro. Our AI assistant is here to help.
             </p>
           </div>
           
-          <Card className="p-4 mb-8 bg-white dark:bg-pocuro-dark-navy border border-pocuro-light-gray dark:border-pocuro-dark-slate rounded-lg shadow-sm">
+          <Card className="p-4 mb-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
             <div className="flex items-center p-3 mb-4 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300">
               <Info className="h-5 w-5 mr-2 flex-shrink-0" />
               <p className="text-sm">
@@ -128,7 +129,7 @@ const HelpCenterContent: React.FC = () => {
               </p>
             </div>
             
-            <div className="h-[400px] overflow-y-auto p-4 mb-4 border border-pocuro-light-gray dark:border-pocuro-dark-slate rounded-md">
+            <div className="h-[400px] overflow-y-auto p-4 mb-4 border border-gray-200 dark:border-gray-700 rounded-md">
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -137,8 +138,8 @@ const HelpCenterContent: React.FC = () => {
                   <div
                     className={`max-w-[80%] p-3 rounded-lg ${
                       message.isUser
-                        ? 'bg-pocuro-blue text-white rounded-tr-none'
-                        : 'bg-gray-100 dark:bg-pocuro-dark-slate text-pocuro-charcoal dark:text-white rounded-tl-none'
+                        ? 'bg-blue-600 text-white rounded-tr-none'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-tl-none'
                     }`}
                   >
                     <div className="flex items-center mb-1">
@@ -160,15 +161,15 @@ const HelpCenterContent: React.FC = () => {
               ))}
               {loading && (
                 <div className="flex justify-start mb-4">
-                  <div className="max-w-[80%] p-3 rounded-lg bg-gray-100 dark:bg-pocuro-dark-slate text-pocuro-charcoal dark:text-white rounded-tl-none">
+                  <div className="max-w-[80%] p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-tl-none">
                     <div className="flex items-center mb-1">
                       <span className="text-xs font-medium">Pocuro AI</span>
                       <Bot className="h-3 w-3 ml-1" />
                     </div>
                     <div className="flex space-x-1">
-                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce"></div>
-                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce delay-100"></div>
-                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce delay-200"></div>
+                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
+                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce delay-100"></div>
+                      <div className="h-2 w-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce delay-200"></div>
                     </div>
                   </div>
                 </div>
@@ -188,7 +189,7 @@ const HelpCenterContent: React.FC = () => {
               <Button 
                 onClick={handleSendMessage} 
                 disabled={!input.trim() || loading}
-                className="bg-pocuro-blue hover:bg-pocuro-blue/90 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <Send className="h-4 w-4" />
               </Button>
@@ -196,7 +197,7 @@ const HelpCenterContent: React.FC = () => {
           </Card>
           
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4 text-pocuro-charcoal dark:text-white">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
               Popular Questions
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
