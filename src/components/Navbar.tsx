@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from './ui/navigation-menu';
 
 interface NavbarProps {
@@ -14,8 +14,15 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   
   const scrollToSection = (sectionId: string) => {
+    // If we're on the blog page or any other page, go to home first
+    if (location.pathname !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
@@ -30,41 +37,53 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   return (
     <header className="w-full py-4 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy border-b border-pocuro-light-gray dark:border-pocuro-dark-slate fixed top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img 
             src={isDarkMode ? "/lovable-uploads/b51bfe97-8e2b-4e28-96cd-b054392494f0.png" : "/lovable-uploads/37d086a4-c6cc-4a20-bbf6-f396cd5e9636.png"} 
             alt="Pocuro Logo" 
             className="h-10 w-auto"
           />
           <span className="text-2xl font-bold text-pocuro-charcoal dark:text-white">Pocuro</span>
-        </div>
+        </Link>
         
         {!isMobile ? (
           <div className="flex items-center gap-4">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
+                  <Link 
+                    to="/"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue transition-colors px-4 py-2"
+                  >
+                    Home
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">Product</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-pocuro-blue/20 to-pocuro-blue/10 p-6 no-underline outline-none focus:shadow-md"
-                            href="#features"
-                            onClick={() => scrollToSection('features')}
-                          >
-                            <div className="mb-2 mt-4 text-lg font-medium">Features</div>
-                            <p className="text-sm leading-tight text-muted-foreground">
-                              Explore the powerful features of Pocuro
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
+                      <li>
+                        <a
+                          href="/#features"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('features');
+                          }}
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Features</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Explore the powerful features of Pocuro
+                          </p>
+                        </a>
                       </li>
                       <li>
                         <a
-                          href="#how-it-works"
-                          onClick={() => scrollToSection('how-it-works')}
+                          href="/#how-it-works"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('how-it-works');
+                          }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">How It Works</div>
@@ -75,13 +94,46 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                       </li>
                       <li>
                         <a
-                          href="#pricing"
-                          onClick={() => scrollToSection('pricing')}
+                          href="/#pricing"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('pricing');
+                          }}
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">Pricing</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             View our pricing plans and options
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/#roadmap"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('roadmap');
+                          }}
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Roadmap</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            See what's coming next for Pocuro
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/#testimonials"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('testimonials');
+                          }}
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Testimonials</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            What our users say about Pocuro
                           </p>
                         </a>
                       </li>
@@ -191,15 +243,6 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <a 
-                    href="#roadmap" 
-                    onClick={() => scrollToSection('roadmap')}
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue transition-colors px-4 py-2"
-                  >
-                    Roadmap
-                  </a>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
             
@@ -233,33 +276,75 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
           <nav>
             <ul className="space-y-4">
               <li>
+                <Link 
+                  to="/" 
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray block mb-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
                 <div className="font-medium mb-2">Product</div>
                 <ul className="pl-4 space-y-2">
                   <li>
                     <a 
-                      href="#features" 
+                      href="/#features" 
                       className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
-                      onClick={() => scrollToSection('features')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('features');
+                      }}
                     >
                       Features
                     </a>
                   </li>
                   <li>
                     <a 
-                      href="#how-it-works" 
+                      href="/#how-it-works" 
                       className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
-                      onClick={() => scrollToSection('how-it-works')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('how-it-works');
+                      }}
                     >
                       How It Works
                     </a>
                   </li>
                   <li>
                     <a 
-                      href="#pricing" 
+                      href="/#pricing" 
                       className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
-                      onClick={() => scrollToSection('pricing')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('pricing');
+                      }}
                     >
                       Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/#roadmap" 
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('roadmap');
+                      }}
+                    >
+                      Roadmap
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/#testimonials" 
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('testimonials');
+                      }}
+                    >
+                      Testimonials
                     </a>
                   </li>
                 </ul>
@@ -303,15 +388,6 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                     <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Terms of Service</a>
                   </li>
                 </ul>
-              </li>
-              <li>
-                <a 
-                  href="#roadmap" 
-                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
-                  onClick={() => scrollToSection('roadmap')}
-                >
-                  Roadmap
-                </a>
               </li>
               
               <li className="pt-4">
