@@ -29,7 +29,10 @@ const BlogContent: React.FC = () => {
         }
         
         if (categoriesResponse.success) {
-          setCategories(categoriesResponse.data);
+          // Fix the typing issue by ensuring we're setting string[] and not unknown[]
+          if (Array.isArray(categoriesResponse.data)) {
+            setCategories(categoriesResponse.data as string[]);
+          }
         }
       } catch (error) {
         console.error('Error loading blog data:', error);
@@ -58,8 +61,8 @@ const BlogContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24">
-        {/* Hero section */}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16 px-4">
+        {/* Hero section - Updated style to be more natural */}
+        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white py-16 px-4 shadow-lg">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Pocuro Blog</h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">

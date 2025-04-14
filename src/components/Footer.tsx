@@ -86,18 +86,6 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="/#roadmap" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('roadmap');
-                  }}
-                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
-                >
-                  Roadmap
-                </a>
-              </li>
-              <li>
-                <a 
                   href="/#testimonials" 
                   onClick={(e) => {
                     e.preventDefault();
@@ -106,6 +94,18 @@ const Footer: React.FC = () => {
                   className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
                 >
                   Testimonials
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/#roadmap" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('roadmap');
+                  }}
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
+                  Roadmap
                 </a>
               </li>
             </ul>
@@ -123,9 +123,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
-                  Documentation
-                </a>
+                <Link 
+                  to="/faq"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
+                  FAQ
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
@@ -133,9 +136,12 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/help-center"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   Help Center
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -144,9 +150,12 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-bold mb-4 text-pocuro-charcoal dark:text-white">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/about-us"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
@@ -154,14 +163,20 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/privacy-policy"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">
+                <Link 
+                  to="/terms-of-service"
+                  className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue"
+                >
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -6,6 +6,7 @@ export type BlogPost = Blog;
 
 export async function fetchBlogPosts() {
   try {
+    console.log('Fetching blog posts...');
     // Use 'any' to override TypeScript's types for now
     const { data, error } = await (supabase as any)
       .from('blogs')
@@ -13,9 +14,11 @@ export async function fetchBlogPosts() {
       .order('published_at', { ascending: false });
     
     if (error) {
+      console.error('Error fetching blogs:', error);
       throw error;
     }
     
+    console.log('Fetched blog posts:', data);
     return { success: true, data: data as BlogPost[] };
   } catch (error) {
     console.error('Error fetching blog posts:', error);
@@ -29,6 +32,7 @@ export async function fetchBlogPosts() {
 
 export async function fetchBlogPost(slug: string) {
   try {
+    console.log(`Fetching blog post with slug: ${slug}`);
     const { data, error } = await (supabase as any)
       .from('blogs')
       .select('*')
@@ -36,9 +40,11 @@ export async function fetchBlogPost(slug: string) {
       .single();
     
     if (error) {
+      console.error(`Error fetching blog post with slug ${slug}:`, error);
       throw error;
     }
     
+    console.log('Fetched blog post:', data);
     return { success: true, data: data as BlogPost };
   } catch (error) {
     console.error(`Error fetching blog post with slug ${slug}:`, error);
@@ -52,16 +58,19 @@ export async function fetchBlogPost(slug: string) {
 
 export async function fetchBlogCategories() {
   try {
+    console.log('Fetching blog categories...');
     const { data, error } = await (supabase as any)
       .from('blogs')
       .select('category');
     
     if (error) {
+      console.error('Error fetching blog categories:', error);
       throw error;
     }
     
     // Extract unique categories
     const categories = ['All', ...new Set(data.map((item: any) => item.category))];
+    console.log('Fetched blog categories:', categories);
     
     return { success: true, data: categories };
   } catch (error) {

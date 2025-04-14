@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   const location = useLocation();
   
   const scrollToSection = (sectionId: string) => {
-    // If we're on the blog page or any other page, go to home first
+    // If we're not on the home page, navigate to home first
     if (location.pathname !== '/') {
       window.location.href = `/#${sectionId}`;
       return;
@@ -62,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                   <NavigationMenuTrigger className="text-pocuro-slate-gray dark:text-pocuro-cool-gray hover:text-pocuro-blue dark:hover:text-pocuro-aqua-blue">Product</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
-                      <li>
+                      <li className="col-span-1">
                         <a
                           href="/#features"
                           onClick={(e) => {
@@ -77,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           </p>
                         </a>
                       </li>
-                      <li>
+                      <li className="col-span-1">
                         <a
                           href="/#how-it-works"
                           onClick={(e) => {
@@ -92,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           </p>
                         </a>
                       </li>
-                      <li>
+                      <li className="col-span-1">
                         <a
                           href="/#pricing"
                           onClick={(e) => {
@@ -107,22 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           </p>
                         </a>
                       </li>
-                      <li>
-                        <a
-                          href="/#roadmap"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            scrollToSection('roadmap');
-                          }}
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Roadmap</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            See what's coming next for Pocuro
-                          </p>
-                        </a>
-                      </li>
-                      <li>
+                      <li className="col-span-1">
                         <a
                           href="/#testimonials"
                           onClick={(e) => {
@@ -134,6 +118,21 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                           <div className="text-sm font-medium leading-none">Testimonials</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             What our users say about Pocuro
+                          </p>
+                        </a>
+                      </li>
+                      <li className="col-span-1">
+                        <a
+                          href="/#roadmap"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection('roadmap');
+                          }}
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Roadmap</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            See what's coming next for Pocuro
                           </p>
                         </a>
                       </li>
@@ -157,15 +156,15 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                         </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/faq"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Documentation</div>
+                          <div className="text-sm font-medium leading-none">FAQ</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            Technical guides and API references
+                            Answers to frequently asked questions
                           </p>
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <a
@@ -179,15 +178,15 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                         </a>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/help-center"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">Help Center</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Get help with your Pocuro account
                           </p>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </NavigationMenuContent>
@@ -197,15 +196,15 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/about-us"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">About Us</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Learn about our mission and team
                           </p>
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <a
@@ -219,26 +218,26 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                         </a>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/privacy-policy"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">Privacy Policy</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             How we protect your personal information
                           </p>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
+                        <Link
+                          to="/terms-of-service"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">Terms of Service</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                             Legal terms for using our service
                           </p>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </NavigationMenuContent>
@@ -325,18 +324,6 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                   </li>
                   <li>
                     <a 
-                      href="/#roadmap" 
-                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection('roadmap');
-                      }}
-                    >
-                      Roadmap
-                    </a>
-                  </li>
-                  <li>
-                    <a 
                       href="/#testimonials" 
                       className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
                       onClick={(e) => {
@@ -345,6 +332,18 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                       }}
                     >
                       Testimonials
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/#roadmap" 
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('roadmap');
+                      }}
+                    >
+                      Roadmap
                     </a>
                   </li>
                 </ul>
@@ -362,13 +361,23 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                     </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Documentation</a>
+                    <Link
+                      to="/faq"
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                    >
+                      FAQ
+                    </Link>
                   </li>
                   <li>
                     <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Privacy Guide</a>
                   </li>
                   <li>
-                    <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Help Center</a>
+                    <Link
+                      to="/help-center"
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                    >
+                      Help Center
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -376,16 +385,31 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
                 <div className="font-medium mb-2">Company</div>
                 <ul className="pl-4 space-y-2">
                   <li>
-                    <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">About Us</a>
+                    <Link
+                      to="/about-us"
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                    >
+                      About Us
+                    </Link>
                   </li>
                   <li>
                     <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Careers</a>
                   </li>
                   <li>
-                    <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Privacy Policy</a>
+                    <Link
+                      to="/privacy-policy"
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                    >
+                      Privacy Policy
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">Terms of Service</a>
+                    <Link
+                      to="/terms-of-service"
+                      className="text-pocuro-slate-gray dark:text-pocuro-cool-gray"
+                    >
+                      Terms of Service
+                    </Link>
                   </li>
                 </ul>
               </li>
