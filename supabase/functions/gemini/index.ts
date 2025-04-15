@@ -1,5 +1,5 @@
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -13,42 +13,40 @@ serve(async (req) => {
   }
 
   try {
-    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
+    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY") || "AIzaSyAFjfSHhOEEFFhcM-Mp_nbyTvKtpVA-flY";
+    
     if (!GEMINI_API_KEY) {
-      throw new Error("GEMINI_API_KEY is not set in environment variables");
+      throw new Error("GEMINI_API_KEY is not set");
     }
 
-    // Parse request body
-    const { prompt } = await req.json();
-    
+    const { prompt, systemPrompt } = await req.json();
+
     if (!prompt) {
       return new Response(
-        JSON.stringify({ error: "Prompt is required" }),
+        JSON.stringify({ error: "No prompt provided" }),
         {
           status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" }
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
       );
     }
 
-    // Call the Gemini API
-    const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+    // Format the message with system and user parts
+    const messages = [
+      { role: "system", parts: [{ text: systemPrompt || "" }] },
+      { role: "user", parts: [{ text: prompt }] }
+    ];
+
+    // Call Gemini API
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
+          contents: messages,
           generationConfig: {
             temperature: 0.7,
             topK: 40,
@@ -59,29 +57,30 @@ serve(async (req) => {
       }
     );
 
-    if (!geminiResponse.ok) {
-      const errorData = await geminiResponse.json();
-      console.error("Gemini API error:", errorData);
-      throw new Error(`Gemini API error: ${JSON.stringify(errorData)}`);
+    const data = await response.json();
+    
+    // Extract the response text
+    let result = "";
+    if (data.candidates && data.candidates.length > 0) {
+      if (data.candidates[0].content && data.candidates[0].content.parts) {
+        result = data.candidates[0].content.parts[0].text || "";
+      }
     }
 
-    const data = await geminiResponse.json();
-    
     return new Response(
-      JSON.stringify(data),
-      { 
+      JSON.stringify({ response: result }),
+      {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200 
       }
     );
   } catch (error) {
-    console.error("Error:", error.message);
+    console.error("Error processing request:", error);
     
     return new Response(
-      JSON.stringify({ error: error.message }),
-      { 
+      JSON.stringify({ error: error.message || "An error occurred" }),
+      {
+        status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500 
       }
     );
   }

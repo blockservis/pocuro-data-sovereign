@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Globe } from 'lucide-react';
-import { useLanguage } from '@/components/LanguageProvider';
+import { useLanguage, Language } from '@/components/LanguageProvider';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
+  { code: 'fr' as Language, name: 'Français', flag: '🇫🇷' },
 ];
 
 const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
   
-  const handleLanguageChange = (languageCode: string) => {
+  const handleLanguageChange = (languageCode: Language) => {
     setLanguage(languageCode);
     setOpen(false);
   };

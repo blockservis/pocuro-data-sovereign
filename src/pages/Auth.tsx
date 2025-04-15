@@ -148,7 +148,7 @@ const AuthContent: React.FC = () => {
               </CardDescription>
             </CardHeader>
             
-            <Tabs defaultValue="signin" className="w-full">
+            <Tabs defaultValue="signup" className="w-full">
               <TabsList className="grid grid-cols-2 w-full">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>

@@ -84,7 +84,9 @@ const IntentFormContent: React.FC = () => {
           setPreviousIntent(intentData[0]);
           
           // Pre-fill the form with previous submission
-          form.setValue('contributionType', intentData[0].contribution_type);
+          if (intentData[0].contribution_type && intentData[0].contribution_type.length > 0) {
+            form.setValue('contributionType', intentData[0].contribution_type);
+          }
           form.setValue('comments', intentData[0].comments || '');
           
           toast({
@@ -137,6 +139,11 @@ const IntentFormContent: React.FC = () => {
       if (values.contributionType.includes('other') && values.otherContribution) {
         contributionType = contributionType.filter(type => type !== 'other');
         contributionType.push(values.otherContribution);
+      }
+      
+      // Ensure the array is not empty to satisfy the non-empty constraint
+      if (contributionType.length === 0) {
+        contributionType = ['no-selection'];
       }
       
       // Submit to Supabase
