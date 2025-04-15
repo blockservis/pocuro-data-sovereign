@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const PocuroMePricingTiers = [
@@ -24,9 +23,9 @@ const PocuroMePricingTiers = [
     description: "For power users and small teams",
     features: [
       "👥 LifeCircle (Smart Contact Manager)",
-      "🪪 Digital ID & Secure Sharing",
-      "💸 Personal Finance Tracker",
-      "❤️‍🩹 Health & Wellness Sync",
+      "🪪 Digital ID Manager",
+      "💸 Finance Manager",
+      "❤️‍🩹 HealthBuddy",
       "🔄 Offline Data Backup"
     ],
     popular: true,
@@ -45,23 +44,22 @@ const PocuroMePricingTiers = [
     ],
     popular: false,
     buttonText: "Choose Premium"
-  },
-  {
-    name: "Pocuro Infinite",
-    price: "Custom Quote",
-    description: "Take full control of your digital life—on your terms.",
-    features: [
-      "🧠 Bespoke AI Setup (MindMate)",
-      "⚙️ Tailored Automations per Module",
-      "🤝 One-on-One Expert Onboarding",
-      "🔒 Custom Privacy + Security Advisory",
-      "📡 Device-to-device Offline Sync System",
-      "💼 Fixed-price packages from $2,500+"
-    ],
-    popular: false,
-    buttonText: "Contact Sales"
   }
 ];
+
+const PocuroInfiniteTier = {
+  name: "Pocuro Infinite",
+  price: "Custom Quote",
+  description: "Take full control of your digital life—on your terms.",
+  features: [
+    "🧠 Bespoke AI Setup (MindMate)",
+    "⚙️ Tailored Automations per Module",
+    "🤝 One-on-One Expert Onboarding",
+    "🔒 Custom Privacy + Security Advisory",
+    "📡 Device-to-device Offline Sync System"
+  ],
+  buttonText: "Contact Sales"
+};
 
 const PocuroBizPricingTiers = [
   {
@@ -69,8 +67,8 @@ const PocuroBizPricingTiers = [
     price: "$49",
     description: "For small businesses",
     features: [
-      "🧩 Core Business Tools",
-      "🔁 Basic Workflow Automations",
+      "🧩 Core ERP Modules",
+      "🔁 Basic Automations",
       "💬 Chat Assistant"
     ],
     popular: false,
@@ -81,27 +79,41 @@ const PocuroBizPricingTiers = [
     price: "$129",
     description: "For growing businesses",
     features: [
-      "🧾 CRM, Payroll & Inventory",
-      "📣 Automated Marketing Campaigns",
-      "📊 Smart Business Insights"
+      "🧾 CRM, Payroll, Inventory",
+      "📣 Marketing Automation",
+      "📊 Business Analytics"
     ],
     popular: true,
     buttonText: "Choose Growth ERP"
   },
   {
     name: "Premium (ERP)",
-    price: "Custom",
+    price: "$499+",
     description: "For enterprise needs",
     features: [
-      "🌐 Advanced Integrations",
-      "🔍 AI-Powered Analytics",
-      "🏛️ Compliance & Governance",
-      "🔧 White-Label Customization"
+      "🌐 Advanced Compliance Modules",
+      "🔍 Custom Dashboards",
+      "🏛️ Premium Support + Training",
+      "🔧 Advanced Integrations"
     ],
     popular: false,
-    buttonText: "Contact Enterprise Sales"
+    buttonText: "Choose Premium ERP"
   }
 ];
+
+const PocuroArchitectTier = {
+  name: "Pocuro Architect",
+  price: "Custom Quote",
+  description: "Complete business automation for enterprises.",
+  features: [
+    "🧰 Full-scale business automation",
+    "🔄 Custom ERP Integrations",
+    "🤖 Dedicated AI Agents",
+    "🎨 White-label Deployment",
+    "📦 Legacy Migration & Support"
+  ],
+  buttonText: "Contact Enterprise Sales"
+};
 
 const PricingSection: React.FC = () => {
   return (
@@ -125,7 +137,8 @@ const PricingSection: React.FC = () => {
           </div>
           
           <TabsContent value="personal" className="w-full">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Standard subscription tiers */}
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               {PocuroMePricingTiers.map((tier, index) => (
                 <div 
                   key={index}
@@ -151,9 +164,7 @@ const PricingSection: React.FC = () => {
                   <div className="mb-6">
                     <div className="flex items-end">
                       <span className="text-4xl font-bold text-pocuro-charcoal dark:text-white">{tier.price}</span>
-                      {tier.price !== "Custom Quote" && (
-                        <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray ml-2">/month</span>
-                      )}
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray ml-2">/month</span>
                     </div>
                     <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray mt-2">
                       Billed annually or 20% more monthly
@@ -177,10 +188,56 @@ const PricingSection: React.FC = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Pocuro Infinite tier (separate) */}
+            <div className="rounded-xl p-8 bg-gradient-to-r from-blue-900/20 to-indigo-900/20 dark:from-blue-800/30 dark:to-indigo-800/30 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow mb-8 max-w-4xl mx-auto">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                  <div className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
+                    Enterprise Solution
+                  </div>
+                  <h3 className="text-2xl font-bold text-pocuro-charcoal dark:text-white">{PocuroInfiniteTier.name}</h3>
+                  <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-lg mt-2">{PocuroInfiniteTier.description}</p>
+                </div>
+                <div className="mt-4 md:mt-0">
+                  <div className="text-3xl font-bold text-pocuro-charcoal dark:text-white">{PocuroInfiniteTier.price}</div>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <ul className="space-y-3">
+                  {PocuroInfiniteTier.features.slice(0, 3).map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="mr-2">{feature.split(' ')[0]}</span>
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                        {feature.split(' ').slice(1).join(' ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="space-y-3">
+                  {PocuroInfiniteTier.features.slice(3).map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="mr-2">{feature.split(' ')[0]}</span>
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                        {feature.split(' ').slice(1).join(' ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="flex justify-center">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
+                  {PocuroInfiniteTier.buttonText}
+                </Button>
+              </div>
+            </div>
           </TabsContent>
           
           <TabsContent value="business" className="w-full">
-            <div className="grid md:grid-cols-3 gap-8">
+            {/* Standard subscription tiers */}
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               {PocuroBizPricingTiers.map((tier, index) => (
                 <div 
                   key={index}
@@ -206,12 +263,10 @@ const PricingSection: React.FC = () => {
                   <div className="mb-6">
                     <div className="flex items-end">
                       <span className="text-4xl font-bold text-pocuro-charcoal dark:text-white">{tier.price}</span>
-                      {tier.price !== "Custom" && (
-                        <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray ml-2">/month</span>
-                      )}
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray ml-2">/month</span>
                     </div>
                     <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray mt-2">
-                      {tier.price !== "Custom" ? "Per user, billed annually" : "Custom contracts available"}
+                      Per user, billed annually
                     </p>
                   </div>
                   
@@ -231,6 +286,51 @@ const PricingSection: React.FC = () => {
                   </Button>
                 </div>
               ))}
+            </div>
+            
+            {/* Pocuro Architect tier (separate) */}
+            <div className="rounded-xl p-8 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 dark:from-indigo-800/30 dark:to-purple-800/30 border border-indigo-200 dark:border-indigo-800 hover:shadow-lg transition-shadow mb-8 max-w-4xl mx-auto">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                  <div className="inline-block bg-indigo-600 text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
+                    Enterprise Solution
+                  </div>
+                  <h3 className="text-2xl font-bold text-pocuro-charcoal dark:text-white">{PocuroArchitectTier.name}</h3>
+                  <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-lg mt-2">{PocuroArchitectTier.description}</p>
+                </div>
+                <div className="mt-4 md:mt-0">
+                  <div className="text-3xl font-bold text-pocuro-charcoal dark:text-white">{PocuroArchitectTier.price}</div>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <ul className="space-y-3">
+                  {PocuroArchitectTier.features.slice(0, 3).map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="mr-2">{feature.split(' ')[0]}</span>
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                        {feature.split(' ').slice(1).join(' ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="space-y-3">
+                  {PocuroArchitectTier.features.slice(3).map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="mr-2">{feature.split(' ')[0]}</span>
+                      <span className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                        {feature.split(' ').slice(1).join(' ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="flex justify-center">
+                <Button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8">
+                  {PocuroArchitectTier.buttonText}
+                </Button>
+              </div>
             </div>
           </TabsContent>
         </Tabs>

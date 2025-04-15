@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { Link, useNavigate } from 'react-router-dom';
-import { submitEarlyAccess } from '@/services/signupService';
 
 const CTASection: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,6 +27,7 @@ const CTASection: React.FC = () => {
     setLoading(true);
     
     try {
+      // Redirect to auth page instead of directly calling the service
       navigate('/auth');
     } catch (error) {
       console.error('Error submitting early access:', error);

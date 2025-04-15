@@ -80,7 +80,7 @@ const IntentFormContent: React.FC = () => {
           setPreviousIntent(intentData[0]);
           
           if (intentData[0].contribution_type && intentData[0].contribution_type.length > 0) {
-            form.setValue('contributionType', intentData[0].contribution_type);
+            form.setValue('contributionType', intentData[0].contribution_type as string[]);
           }
           form.setValue('comments', intentData[0].comments || '');
           

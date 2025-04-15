@@ -39,6 +39,11 @@
 // - For local development, add 'http://localhost:5173' (or your dev port) to authorized origins
 // - For production, add your deployed domain
 // - Test your authentication in an incognito window to avoid cookie issues
+// - In the Supabase dashboard, set the Site URL and redirect URL correctly
+
+// FOR USERS ON DEPLOYED SITES:
+// 1. Set your Site URL in Authentication > URL Configuration to your deployed URL
+// 2. Set your Redirect URL to the same or a specific path on your site
 
 export const info = {
   message: "Please follow the instructions above to set up OAuth providers. Once configured, users will be able to sign in with Google, Facebook, and Apple."

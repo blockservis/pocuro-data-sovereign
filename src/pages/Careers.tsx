@@ -5,9 +5,16 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { MailIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CareersContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+  
+  const handleGetNotified = () => {
+    // Redirect to auth flow for career opportunities
+    navigate('/auth');
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -87,7 +94,10 @@ const CareersContent: React.FC = () => {
                 </ul>
               </div>
               
-              <Button className="bg-pocuro-blue hover:bg-opacity-90 text-white flex items-center gap-2">
+              <Button 
+                className="bg-pocuro-blue hover:bg-opacity-90 text-white flex items-center gap-2"
+                onClick={handleGetNotified}
+              >
                 <MailIcon size={18} />
                 <span>Get notified about opportunities</span>
               </Button>
