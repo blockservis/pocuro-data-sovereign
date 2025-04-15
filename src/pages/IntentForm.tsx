@@ -26,6 +26,7 @@ const contributionOptions = [
   { id: 'other', label: 'Other' },
 ];
 
+// Modify the schema to use a non-empty array schema instead of a tuple
 const formSchema = z.object({
   contributionType: z.array(z.string()).nonempty("Please select at least one option"),
   otherContribution: z.string().optional(),

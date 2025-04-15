@@ -1,16 +1,16 @@
 
-import { cn } from "@/lib/utils";
-import { TestimonialCard, TestimonialAuthor } from "@/components/ui/testimonial-card";
+import { cn } from "@/lib/utils"
+import { TestimonialCard, TestimonialAuthor } from "@/components/ui/testimonial-card"
 
 interface TestimonialsSectionProps {
-  title: string;
-  description: string;
+  title: string
+  description: string
   testimonials: Array<{
-    author: TestimonialAuthor;
-    text: string;
-    href?: string;
-  }>;
-  className?: string;
+    author: TestimonialAuthor
+    text: string
+    href?: string
+  }>
+  className?: string
 }
 
 export function TestimonialsSection({ 
@@ -54,5 +54,5 @@ export function TestimonialsSection({
         </div>
       </div>
     </section>
-  );
+  )
 }
