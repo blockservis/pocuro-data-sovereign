@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -26,7 +25,6 @@ const contributionOptions = [
   { id: 'other', label: 'Other' },
 ];
 
-// Fix the schema to use an array of strings instead of a tuple
 const formSchema = z.object({
   contributionType: z.array(z.string()).nonempty("Please select at least one option"),
   otherContribution: z.string().optional(),
@@ -57,7 +55,6 @@ const IntentFormContent: React.FC = () => {
   });
 
   useEffect(() => {
-    // Check for user session
     const checkSession = async () => {
       setLoading(true);
       const { data } = await supabase.auth.getSession();
@@ -69,10 +66,8 @@ const IntentFormContent: React.FC = () => {
       
       setUser(data.session.user);
       
-      // Pre-fill the email field
       form.setValue('email', data.session.user.email || '');
       
-      // Check for previous intent submission
       try {
         const { data: intentData, error } = await supabase
           .from('user_intents')
@@ -84,7 +79,6 @@ const IntentFormContent: React.FC = () => {
         if (!error && intentData && intentData.length > 0) {
           setPreviousIntent(intentData[0]);
           
-          // Pre-fill the form with previous submission
           if (intentData[0].contribution_type && intentData[0].contribution_type.length > 0) {
             form.setValue('contributionType', intentData[0].contribution_type);
           }
@@ -104,7 +98,6 @@ const IntentFormContent: React.FC = () => {
     
     checkSession();
     
-    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate('/auth');
@@ -133,21 +126,17 @@ const IntentFormContent: React.FC = () => {
     setSubmitting(true);
     
     try {
-      // Process the contribution type array
       let contributionType = values.contributionType;
       
-      // If "Other" is selected, add the custom input to the array
       if (values.contributionType.includes('other') && values.otherContribution) {
         contributionType = contributionType.filter(type => type !== 'other');
         contributionType.push(values.otherContribution);
       }
       
-      // Ensure the array is not empty to satisfy the non-empty constraint
       if (contributionType.length === 0) {
         contributionType = ['no-selection'];
       }
       
-      // Submit to Supabase
       const { data, error } = await supabase
         .from('user_intents')
         .insert([{
@@ -163,7 +152,6 @@ const IntentFormContent: React.FC = () => {
       
       setShowSuccess(true);
       
-      // Reset the form
       form.reset({
         contributionType: [],
         otherContribution: '',
