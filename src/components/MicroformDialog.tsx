@@ -86,14 +86,27 @@ export function MicroformDialog({
 
   const handleSubmit = async () => {
     try {
-      // Insert into user_intents table - note user_id is now optional
-      const { error } = await supabase.from('user_intents').insert({
-        email,
-        contribution_type: contributionTypes,
-        comments: feedback
-      });
+      // Insert into early_access_signups table
+      const { error: signupError } = await supabase
+        .from('early_access_signups')
+        .insert({
+          email,
+          name
+        });
 
-      if (error) throw error;
+      if (signupError) throw signupError;
+
+      // Insert into user_intents table
+      const { error: intentError } = await supabase
+        .from('user_intents')
+        .insert({
+          email,
+          contribution_type: contributionTypes,
+          comments: feedback,
+          user_id: null // allow null for non-authenticated users
+        });
+
+      if (intentError) throw intentError;
 
       toast({
         title: "Success!",
