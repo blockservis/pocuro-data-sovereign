@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Info, Map, HelpCircle, Book, Shield, FileText, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,7 @@ interface NavigationMenusProps {
   setMobileMenuOpen?: (isOpen: boolean) => void;
 }
 
-export const DesktopNavigationMenus: React.FC<NavigationMenusProps> = ({ 
+export const DesktopNavigationMenus: React.FC<{ scrollToSection: (sectionId: string) => void }> = ({ 
   scrollToSection 
 }) => {
   const location = useLocation();
@@ -135,10 +134,10 @@ export const DesktopNavigationMenus: React.FC<NavigationMenusProps> = ({
   );
 };
 
-export const MobileNavigationMenu: React.FC<NavigationMenusProps> = ({ 
-  scrollToSection, 
-  setMobileMenuOpen = () => {} 
-}) => {
+export const MobileNavigationMenu: React.FC<{
+  scrollToSection: (sectionId: string) => void;
+  setMobileMenuOpen: (isOpen: boolean) => void;
+}> = ({ scrollToSection, setMobileMenuOpen }) => {
   const location = useLocation();
   const isHome = location.pathname === '/';
   
