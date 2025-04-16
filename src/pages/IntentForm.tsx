@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from "@/components/ui/use-toast";
-import { v4 as uuidv4 } from 'uuid';
+import { supabase } from '@/integrations/supabase/client';
 
 const IntentForm: React.FC = () => {
   const [contributionType, setContributionType] = useState<string[]>(["I want to use the product"]);
@@ -21,37 +21,30 @@ const IntentForm: React.FC = () => {
     setLoading(true);
 
     try {
-      const anonymousUserId = uuidv4();
-
-      const response = await fetch('/api/submitIntent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Insert directly to user_intents table without user_id
+      const { data, error } = await supabase
+        .from('user_intents')
+        .insert({
           email,
           contribution_type: contributionType,
-          comments,
-          user_id: anonymousUserId,
-        }),
-      });
+          comments
+        });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Your intent has been submitted.",
-        })
-        setEmail('');
-        setContributionType(["I want to use the product"]);
-        setComments('');
-      } else {
+      if (error) {
+        console.error('Form submission error:', error);
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: data.message || "Failed to submit intent. Please try again.",
-        })
+          description: error.message || "Failed to submit intent. Please try again.",
+        });
+      } else {
+        toast({
+          title: "Success!",
+          description: "Your intent has been submitted.",
+        });
+        setEmail('');
+        setContributionType(["I want to use the product"]);
+        setComments('');
       }
     } catch (error) {
       console.error('Form submission error:', error);
@@ -59,7 +52,7 @@ const IntentForm: React.FC = () => {
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "Failed to submit intent. Please try again.",
-      })
+      });
     } finally {
       setLoading(false);
     }

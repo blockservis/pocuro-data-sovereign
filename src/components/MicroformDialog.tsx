@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { Label } from "@/components/ui/label";
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
-import { v4 as uuidv4 } from 'uuid';
 
 interface MicroformDialogProps {
   open: boolean;
@@ -89,9 +89,6 @@ export function MicroformDialog({
     try {
       setIsSubmitting(true);
       
-      // Generate a unique user ID since we don't have auth
-      const anonymousUserId = uuidv4();
-      
       // Check if email already exists in early_access_signups
       const { data: existingSignups, error: checkError } = await supabase
         .from('early_access_signups')
@@ -118,14 +115,13 @@ export function MicroformDialog({
         }
       }
 
-      // Insert into user_intents table with a valid UUID
+      // Insert directly into user_intents without user_id
       const { error: intentError } = await supabase
         .from('user_intents')
         .insert({
           email,
           contribution_type: contributionTypes,
-          comments: feedback,
-          user_id: anonymousUserId
+          comments: feedback
         });
 
       if (intentError) {
