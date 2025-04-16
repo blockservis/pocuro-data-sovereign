@@ -35,7 +35,7 @@
  
     --radius: 0.5rem;
     
-    /* Custom deep blue color for header/footer from FAQ */
+    /* Custom deep blue color for header/footer */
     --deep-blue: 222 47% 11%;
   }
  
@@ -68,7 +68,7 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
     
-    /* Custom deep blue color for header/footer from FAQ */
+    /* Custom deep blue color for header/footer */
     --deep-blue: 222 47% 11%;
   }
 }
@@ -79,6 +79,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Fix for section headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground;
   }
 }
 
@@ -108,22 +112,22 @@
   animation: marquee-vertical var(--duration) linear infinite;
 }
 
-/* Make sure the Marquee animation is visible */
 @layer utilities {
   .max-w-container {
     max-width: 1280px;
   }
   
-  /* Add utility classes for our deep blue color */
+  /* Color utilities */
   .bg-deep-blue {
-    background-color: hsl(var(--deep-blue));
+    @apply dark:bg-[#1a1f2d] bg-[#1a1f2d];
   }
   
   .text-deep-blue {
-    color: hsl(var(--deep-blue));
+    @apply dark:text-[#1a1f2d] text-[#1a1f2d];
   }
   
   .border-deep-blue {
-    border-color: hsl(var(--deep-blue));
+    @apply dark:border-[#1a1f2d] border-[#1a1f2d];
   }
 }
+

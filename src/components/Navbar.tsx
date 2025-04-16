@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DesktopNavigationMenus, MobileNavigationMenu } from './NavbarComponents/NavigationMenus';
 import { DesktopNavbarActions, MobileNavbarActions } from './NavbarComponents/NavbarActions';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -17,7 +17,6 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
   const { t } = useLanguage();
   
   const scrollToSection = (sectionId: string) => {
@@ -39,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   };
   
   return (
-    <header className="w-full py-4 px-4 md:px-8 bg-deep-blue text-white border-b border-pocuro-light-gray/10 fixed top-0 z-50">
+    <header className="w-full py-4 px-4 md:px-8 bg-deep-blue text-white fixed top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img 
@@ -75,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
       
       {/* Mobile menu */}
       {isMobile && mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-deep-blue border-b border-pocuro-light-gray/10 p-4 shadow-lg">
+        <div className="absolute top-full left-0 w-full bg-deep-blue border-b border-white/10 p-4 shadow-lg">
           <MobileNavigationMenu 
             scrollToSection={scrollToSection} 
             setMobileMenuOpen={setMobileMenuOpen}

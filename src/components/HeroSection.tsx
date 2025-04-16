@@ -16,13 +16,13 @@ const HeroSection: React.FC = () => {
 
   const heroImage = theme === 'dark' 
     ? "/lovable-uploads/83bd9e99-b2ad-45ce-a501-abd59ed6775e.png" 
-    : "/lovable-uploads/ca99a085-1159-4397-b177-e9097d915a65.png";
-  
+    : "/lovable-uploads/ca99a085-1159-4397-b177-e097d915665.png";
+
   return (
-    <section className="pt-36 pb-20 px-4 md:px-8" id="hero">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section className="pt-36 pb-16 px-4 md:px-8 bg-background" id="hero">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
         <div className="animate-fade-in">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-pocuro-charcoal dark:text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">
             Take Control of Your Life with a <span className="text-pocuro-blue">Privacy-First</span> Personal Resource Planner
           </h1>
           
@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
             
             <Button 
               variant="outline" 
-              className="py-6 px-8 rounded-lg text-lg font-medium border-pocuro-light-gray dark:border-pocuro-dark-slate dark:text-white flex items-center gap-2"
+              className="py-6 px-8 rounded-lg text-lg font-medium border-pocuro-light-gray dark:border-pocuro-dark-slate text-pocuro-charcoal dark:text-white"
               onClick={() => scrollToSection('features')}
             >
               Learn More
@@ -49,12 +49,12 @@ const HeroSection: React.FC = () => {
           
           <div className="flex items-center gap-6 mt-8">
             <div className="flex items-center gap-2 text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-              <Shield size={20} className="text-pocuro-blue" />
+              <Shield className="text-pocuro-blue" size={20} />
               <span>End-to-end encryption</span>
             </div>
             
             <div className="flex items-center gap-2 text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-              <Lock size={20} className="text-pocuro-blue" />
+              <Lock className="text-pocuro-blue" size={20} />
               <span>100% Local Processing</span>
             </div>
           </div>
