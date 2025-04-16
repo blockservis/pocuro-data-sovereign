@@ -1,6 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export interface TestimonialAuthor {
   name: string;
@@ -16,17 +17,12 @@ interface TestimonialCardProps {
 }
 
 export function TestimonialCard({ author, text, href }: TestimonialCardProps) {
-  // Default avatar images if author.avatar is missing or invalid
-  const defaultAvatars = [
-    "/lovable-uploads/9a81b6c0-9f3e-4b3d-a296-b2567cf70566.png",
-    "/lovable-uploads/8e0cccd7-1ee2-40b4-ab2b-872ad9ab82dd.png",
-    "/lovable-uploads/6f486a44-1594-48bb-9d19-82f268cafe20.png"
-  ];
-  
-  // Get a consistent avatar based on the author's name
-  const getDefaultAvatar = (name: string) => {
-    const index = name.charCodeAt(0) % defaultAvatars.length;
-    return defaultAvatars[index];
+  // Get author initials for fallback
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("");
   };
 
   return (
@@ -43,24 +39,18 @@ export function TestimonialCard({ author, text, href }: TestimonialCardProps) {
       <blockquote>
         <p className="text-foreground">"{text}"</p>
         <div className="mt-6 flex items-center">
-          {author.avatar || getDefaultAvatar(author.name) ? (
-            <div className="mr-3 h-10 w-10 overflow-hidden rounded-full border">
-              <img
-                src={author.avatar || getDefaultAvatar(author.name)}
-                alt={author.name}
-                width={40}
-                height={40}
+          <Avatar className="mr-3 h-10 w-10">
+            {author.avatar ? (
+              <AvatarImage 
+                src={author.avatar} 
+                alt={author.name} 
                 className="h-full w-full object-cover"
               />
-            </div>
-          ) : (
-            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground">
-              {author.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </div>
-          )}
+            ) : null}
+            <AvatarFallback>
+              {getInitials(author.name)}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <cite className="not-italic text-muted-foreground">
               <div className="font-semibold text-foreground">{author.name}</div>

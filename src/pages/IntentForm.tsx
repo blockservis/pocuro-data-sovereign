@@ -5,10 +5,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import { v4 as uuidv4 } from 'uuid';
 
 const IntentForm: React.FC = () => {
-  // Update the state to use tuple type instead of string[]
   const [contributionType, setContributionType] = useState<[string, ...string[]]>(["I want to use the product"]);
   const [email, setEmail] = useState('');
   const [comments, setComments] = useState('');
@@ -20,7 +20,7 @@ const IntentForm: React.FC = () => {
     setLoading(true);
 
     try {
-      const userId = localStorage.getItem('sb-getjbnslnwglazujjgxc-auth-user')?.slice(6, 42) || 'unknown';
+      const anonymousUserId = uuidv4();
 
       const response = await fetch('/api/submitIntent', {
         method: 'POST',
@@ -31,7 +31,7 @@ const IntentForm: React.FC = () => {
           email,
           contribution_type: contributionType,
           comments,
-          user_id: userId,
+          user_id: anonymousUserId,
         }),
       });
 
@@ -70,7 +70,6 @@ const IntentForm: React.FC = () => {
         ? prev.filter(type => type !== value)
         : [...prev, value];
       
-      // Ensure there's always at least one option selected
       return newTypes.length > 0 
         ? (newTypes as [string, ...string[]]) 
         : ["I want to use the product"] as [string, ...string[]];
