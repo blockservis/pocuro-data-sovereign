@@ -36,21 +36,47 @@ export function TestimonialsSection({
         </div>
 
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-          <div className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:40s]">
-            <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]">
-              {[...Array(4)].map((_, setIndex) => (
-                testimonials.map((testimonial, i) => (
-                  <TestimonialCard 
-                    key={`${setIndex}-${i}`}
-                    {...testimonial}
-                  />
-                ))
-              ))}
+          {/* Mobile version - stacks testimonials in rows */}
+          <div className="block w-full md:hidden overflow-hidden">
+            <div className="group flex flex-col overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] [--duration:60s]">
+              <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee-vertical flex-col group-hover:[animation-play-state:paused]">
+                {/* Double the testimonials to ensure seamless looping */}
+                {[...Array(2)].map((_, setIndex) => (
+                  testimonials.map((testimonial, i) => (
+                    <div key={`mobile-${setIndex}-${i}`} className="my-2">
+                      <TestimonialCard 
+                        {...testimonial}
+                      />
+                    </div>
+                  ))
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop version - horizontal row */}
+          <div className="hidden md:block w-full overflow-hidden">
+            <div className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:60s]">
+              <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]">
+                {/* Double the testimonials to ensure seamless looping */}
+                {[...Array(2)].map((_, setIndex) => (
+                  testimonials.map((testimonial, i) => (
+                    <TestimonialCard 
+                      key={`desktop-${setIndex}-${i}`}
+                      {...testimonial}
+                    />
+                  ))
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-background sm:block" />
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-background sm:block" />
+          
+          {/* Vertical gradients for mobile */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 block h-1/3 bg-gradient-to-b from-background md:hidden" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 block h-1/3 bg-gradient-to-t from-background md:hidden" />
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
@@ -15,24 +14,26 @@ const PrivacyGuideContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24 pb-16">
-        {/* Hero section */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 text-white py-20 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Privacy Guide</h1>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
-              Understanding how Pocuro protects your data and respects your privacy.
+        {/* Header section - updated to match FAQ style */}
+        <section className="py-16 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">
+              Privacy Guide
+            </h1>
+            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto">
+              Understanding how Pocuro protects your privacy at every step.
             </p>
           </div>
         </section>
         
         {/* Privacy principles section */}
-        <section className="py-16 px-4 bg-white dark:bg-pocuro-dark-navy">
+        <section className="py-16 px-4 bg-white dark:bg-pocuro-dark-slate">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
                 Our Privacy Principles
               </h2>
-              <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto">
+              <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray">
                 At Pocuro, privacy isn't just a feature—it's our foundation. 
                 Here's how we're different.
               </p>

@@ -96,14 +96,14 @@ export function MicroformDialog({
 
       if (signupError) throw signupError;
 
-      // Insert into user_intents table
+      // Insert into user_intents table with NULL for user_id since we're not authenticated
       const { error: intentError } = await supabase
         .from('user_intents')
         .insert({
           email,
           contribution_type: contributionTypes,
           comments: feedback,
-          user_id: null // allow null for non-authenticated users
+          user_id: 'anonymous' // Use a placeholder value since null isn't allowed
         });
 
       if (intentError) throw intentError;

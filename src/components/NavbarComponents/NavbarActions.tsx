@@ -40,7 +40,7 @@ export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({
         onClick={handleGetEarlyAccess}
         className="bg-pocuro-blue"
       >
-        {t('nav.earlyAccess')}
+        Get Early Access
       </Button>
     </div>
   );
@@ -65,7 +65,7 @@ export const MobileNavbarActions: React.FC<MobileNavbarActionsProps> = ({
         onClick={handleClick}
         className="w-full bg-pocuro-blue"
       >
-        {t('nav.earlyAccess')}
+        Get Early Access
       </Button>
     </div>
   );

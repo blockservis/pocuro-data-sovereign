@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Database, Users, MessageSquare, Heart } from 'lucide-react';
+import { Shield, Lock, Database, Users, MessageSquare, Heart, Sparkles } from 'lucide-react';
 
 const AboutUsContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -42,18 +42,21 @@ const AboutUsContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24 pb-16">
-        {/* Hero section */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 text-white py-20 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h1>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-8">
-              We're building a world where personal data belongs to individuals, not corporations.
+        {/* Header section - updated to match FAQ style */}
+        <section className="py-16 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">
+              Our Mission
+            </h1>
+            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto mb-8">
+              We're building a world where your personal data belongs to you—not corporations.
+              Pocuro empowers individuals to plan, protect, and grow using AI—without sacrificing privacy, agency, or peace of mind.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              <Button asChild size="lg" className="bg-pocuro-blue hover:bg-opacity-90 text-white">
                 <Link to="/careers">Join Our Team</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="border-pocuro-blue text-pocuro-blue dark:text-pocuro-aqua-blue dark:border-pocuro-aqua-blue hover:bg-pocuro-blue/10">
                 <Link to="/privacy-guide">Our Privacy Approach</Link>
               </Button>
             </div>
@@ -75,13 +78,16 @@ const AboutUsContent: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-lg text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
-                  Pocuro began in 2023 when our founder, frustrated with the privacy compromises required by mainstream productivity tools, assembled a team of like-minded engineers, designers, and privacy advocates.
+                  Pocuro began in 2025, when our founders—deeply concerned by the growing wave of privacy erosion accelerated by AI advancements—came together with a team of engineers, designers, and advocates who shared the same unease.
                 </p>
                 <p className="text-lg text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
-                  Our mission was clear: create powerful tools for personal organization that put users in complete control of their data, with privacy built into the core of every feature.
+                  Mainstream tools were becoming more powerful, but also more invasive—treating user data as fuel for automation rather than something sacred.
+                </p>
+                <p className="text-lg text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
+                  Together, we envisioned a different path: to build technology that empowers everyday users to embrace AI and automation—while still honoring their fundamental rights to privacy, autonomy, and digital security.
                 </p>
                 <p className="text-lg text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  Today, we're building PocuroMe, a comprehensive personal resource planner that combines the best of AI-assisted productivity with uncompromising privacy protection.
+                  The name "Pocuro" is inspired by the Latin word curo—"I care" or "I manage." It reflects our mission of personal curation, careful control, and purposeful planning. It's also a nod to a pocket—small, secure, always within reach.
                 </p>
               </div>
               <div className="relative">
@@ -98,6 +104,12 @@ const AboutUsContent: React.FC = () => {
                   </p>
                 </div>
               </div>
+            </div>
+            
+            <div className="mt-12 text-center">
+              <p className="text-lg text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
+                Today, we're building PocuroMe, a privacy-first personal planner that merges powerful automation with intentional design—so users can focus on what matters, not wrestle with digital noise.
+              </p>
             </div>
           </div>
         </section>
@@ -121,7 +133,7 @@ const AboutUsContent: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Privacy by Design</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We build with privacy as the foundation, not an afterthought. Every feature starts with the question: "How can we make this private by default?"
+                  We don't just add privacy—we start with it. Every feature begins with the question: "How can we make this private by default?"
                 </p>
               </div>
               
@@ -131,7 +143,7 @@ const AboutUsContent: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">User Sovereignty</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We believe users should own and control their data. No exceptions, no compromises, no hidden agendas.
+                  You own your data. No exceptions. No compromises. We build tools that respect that truth.
                 </p>
               </div>
               
@@ -141,7 +153,7 @@ const AboutUsContent: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Local-First Computing</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We prioritize local processing and storage over cloud-based solutions, giving users true ownership of their digital lives.
+                  Whenever possible, your data stays on your device—processed, encrypted, and synchronized locally.
                 </p>
               </div>
               
@@ -151,7 +163,7 @@ const AboutUsContent: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Radical Transparency</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We believe in clear communication, open source when possible, and always being honest about how our technology works.
+                  We're open about how our systems work. Ethical design and transparency aren't just ideals—they're requirements.
                 </p>
               </div>
               
@@ -159,9 +171,19 @@ const AboutUsContent: React.FC = () => {
                 <div className="bg-pocuro-blue/10 dark:bg-pocuro-blue/20 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-pocuro-blue" />
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Inclusive Design</h3>
+                <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Inclusive, Calm Design</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We create tools that work for everyone, regardless of technical expertise, ability, or background.
+                  Our tools are made for real people, not power users. Clear, minimalist design ensures usefulness, not overwhelm.
+                </p>
+              </div>
+              
+              <div className="bg-white dark:bg-pocuro-dark-slate rounded-xl p-6 shadow-md">
+                <div className="bg-pocuro-blue/10 dark:bg-pocuro-blue/20 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                  <Sparkles className="h-6 w-6 text-pocuro-blue" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Modular Intelligence</h3>
+                <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
+                  No two lives are the same. Pocuro is modular by design—adaptable to your needs, whether it's scheduling, finances, or secure storage.
                 </p>
               </div>
               
@@ -171,7 +193,7 @@ const AboutUsContent: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-pocuro-charcoal dark:text-white">Sustainable Growth</h3>
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-                  We build for the long term, with sustainable business models that align our success with our users' best interests.
+                  We grow with purpose. No VC-fueled invasions of privacy—just long-term, user-aligned value creation.
                 </p>
               </div>
             </div>

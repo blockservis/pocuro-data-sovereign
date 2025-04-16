@@ -37,23 +37,25 @@ const CTASection: React.FC = () => {
           Join our early access program and be the first to experience the future of privacy-focused personal management.
         </p>
         
-        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-          <Input 
-            type="text" 
-            placeholder="Your name" 
-            className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          
-          <Input 
-            type="email" 
-            placeholder="Your email address" 
-            className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-2xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4">
+            <Input 
+              type="text" 
+              placeholder="Your name" 
+              className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            
+            <Input 
+              type="email" 
+              placeholder="Your email address" 
+              className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
           
           <Button 
             type="submit" 

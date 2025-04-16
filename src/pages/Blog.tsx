@@ -61,11 +61,13 @@ const BlogContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24">
-        {/* Hero section - Updated to match home page style */}
-        <section className="bg-gradient-to-r from-pocuro-blue to-pocuro-light-blue dark:from-pocuro-dark-navy dark:to-pocuro-blue text-white py-16 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Pocuro Blog</h1>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+        {/* Header section - updated to match FAQ style */}
+        <section className="py-16 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">
+              Pocuro Blog
+            </h1>
+            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto">
               Insights and updates on privacy-first technologies, personal data management, and more.
             </p>
           </div>
