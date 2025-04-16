@@ -86,9 +86,9 @@ export function MicroformDialog({
 
   const handleSubmit = async () => {
     try {
-      // Insert into user_intents table
+      // Insert into user_intents table - note user_id is now optional
       const { error } = await supabase.from('user_intents').insert({
-        email: email,
+        email,
         contribution_type: contributionTypes,
         comments: feedback
       });

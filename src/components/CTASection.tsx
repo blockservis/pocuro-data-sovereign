@@ -2,43 +2,27 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from '@/components/ui/use-toast';
 import { MicroformDialog } from './MicroformDialog';
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-});
-
 const CTASection: React.FC = () => {
   const [showMicroform, setShowMicroform] = useState(false);
-  const [formValues, setFormValues] = useState<{ name: string; email: string }>({ 
-    name: '', 
-    email: '' 
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const { toast } = useToast();
   
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-    },
-  });
-  
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    setFormValues({
-      name: values.name,
-      email: values.email
-    });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast({
+        variant: "destructive",
+        title: "Email Required",
+        description: "Please enter your email address to continue."
+      });
+      return;
+    }
+    
     setShowMicroform(true);
   };
 
@@ -53,46 +37,31 @@ const CTASection: React.FC = () => {
           Join our early access program and be the first to experience the future of privacy-focused personal management.
         </p>
         
-        <div className="max-w-md mx-auto bg-white dark:bg-pocuro-dark-slate rounded-xl shadow-md p-8 border border-pocuro-light-gray dark:border-pocuro-dark-slate">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="Your email address" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <Button 
-                type="submit" 
-                className="w-full bg-pocuro-blue hover:bg-opacity-90"
-              >
-                Get Early Access
-              </Button>
-            </form>
-          </Form>
-        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
+          <Input 
+            type="text" 
+            placeholder="Your name" 
+            className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          
+          <Input 
+            type="email" 
+            placeholder="Your email address" 
+            className="md:flex-1 bg-white dark:bg-pocuro-dark-slate"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          
+          <Button 
+            type="submit" 
+            className="bg-pocuro-blue hover:bg-opacity-90"
+          >
+            Get Early Access
+          </Button>
+        </form>
         
         <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray mt-4">
           By signing up, you agree to our <a href="/privacy-policy" className="text-pocuro-blue hover:underline">Privacy Policy</a> and <a href="/terms-of-service" className="text-pocuro-blue hover:underline">Terms of Service</a>.
@@ -102,8 +71,8 @@ const CTASection: React.FC = () => {
       <MicroformDialog 
         open={showMicroform} 
         onOpenChange={setShowMicroform}
-        initialName={formValues.name}
-        initialEmail={formValues.email}
+        initialName={name}
+        initialEmail={email}
       />
     </section>
   );

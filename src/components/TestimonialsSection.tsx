@@ -47,6 +47,24 @@ const TestimonialsSection: React.FC = () => {
     );
   }
 
+  // Make sure we have testimonials before rendering the marquee
+  if (testimonials.length === 0) {
+    return (
+      <section className="py-20 px-4 md:px-8 bg-pocuro-soft-white dark:bg-pocuro-deep-charcoal" id="testimonials">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
+              Trusted by Privacy-Conscious Users
+            </h2>
+            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto">
+              No testimonials available yet.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <MarqueeTestimonialsSection
       title="Trusted by Privacy-Conscious Users"

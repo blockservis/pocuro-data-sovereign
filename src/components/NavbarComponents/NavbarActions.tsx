@@ -1,89 +1,72 @@
 
-import React, { useState } from 'react';
-import { Sun, Moon } from 'lucide-react';
+// Update the file to include the handleGetEarlyAccess prop
+import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Sun, Moon } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useLanguage } from '../LanguageProvider';
-import { MicroformDialog } from '../MicroformDialog';
 
 interface NavbarActionsProps {
   toggleTheme: () => void;
   isDarkMode: boolean;
-  handleGetEarlyAccess?: () => void;
+  handleGetEarlyAccess: () => void;
+}
+
+interface MobileNavbarActionsProps extends NavbarActionsProps {
+  setMobileMenuOpen: (isOpen: boolean) => void;
 }
 
 export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({ 
   toggleTheme, 
   isDarkMode,
-  handleGetEarlyAccess
+  handleGetEarlyAccess 
 }) => {
   const { t } = useLanguage();
-  const [showMicroform, setShowMicroform] = useState(false);
-  
-  const handleClick = () => {
-    if (handleGetEarlyAccess) {
-      handleGetEarlyAccess();
-    } else {
-      setShowMicroform(true);
-    }
-  };
   
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2">
-        <LanguageSwitcher />
-        <Button variant="outline" size="icon" onClick={toggleTheme}>
-          {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </Button>
-      </div>
+    <div className="flex items-center gap-3">
+      <LanguageSwitcher />
       
       <Button 
-        className="bg-pocuro-blue hover:bg-opacity-90 text-white"
-        onClick={handleClick}
+        variant="outline" 
+        size="icon" 
+        onClick={toggleTheme} 
+        className="border-none"
       >
-        Get Early Access
+        {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
       </Button>
       
-      <MicroformDialog 
-        open={showMicroform} 
-        onOpenChange={setShowMicroform}
-      />
+      <Button 
+        onClick={handleGetEarlyAccess}
+        className="bg-pocuro-blue"
+      >
+        {t('nav.earlyAccess')}
+      </Button>
     </div>
   );
 };
 
-export const MobileNavbarActions: React.FC<NavbarActionsProps & { setMobileMenuOpen: (isOpen: boolean) => void }> = ({ 
-  toggleTheme, 
+export const MobileNavbarActions: React.FC<MobileNavbarActionsProps> = ({ 
   isDarkMode, 
-  setMobileMenuOpen,
-  handleGetEarlyAccess
+  toggleTheme, 
+  handleGetEarlyAccess,
+  setMobileMenuOpen 
 }) => {
-  const [showMicroform, setShowMicroform] = useState(false);
+  const { t } = useLanguage();
   
   const handleClick = () => {
+    handleGetEarlyAccess();
     setMobileMenuOpen(false);
-    if (handleGetEarlyAccess) {
-      handleGetEarlyAccess();
-    } else {
-      setShowMicroform(true);
-    }
   };
   
   return (
-    <>
-      <li className="pt-4">
-        <Button 
-          className="w-full bg-pocuro-blue hover:bg-opacity-90 text-white"
-          onClick={handleClick}
-        >
-          Get Early Access
-        </Button>
-      </li>
-      
-      <MicroformDialog 
-        open={showMicroform} 
-        onOpenChange={setShowMicroform}
-      />
-    </>
+    <div className="mt-4 flex flex-col space-y-2">
+      <Button 
+        onClick={handleClick}
+        className="w-full bg-pocuro-blue"
+      >
+        {t('nav.earlyAccess')}
+      </Button>
+    </div>
   );
 };
