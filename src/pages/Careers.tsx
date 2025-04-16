@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,11 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const CareersContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
-  const navigate = useNavigate();
+  const [showMicroform, setShowMicroform] = useState(false);
   
   const handleGetNotified = () => {
-    // Redirect to auth flow for career opportunities
-    navigate('/auth');
+    setShowMicroform(true);
   };
   
   return (
@@ -105,6 +103,12 @@ const CareersContent: React.FC = () => {
           </div>
         </section>
       </main>
+      
+      <MicroformDialog 
+        open={showMicroform} 
+        onOpenChange={setShowMicroform}
+        preSelectedOption="I want to help develop the ecosystem"
+      />
       
       <Footer />
     </div>

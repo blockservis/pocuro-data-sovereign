@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { MicroformDialog } from './MicroformDialog';
 
 const CTASection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [showMicroform, setShowMicroform] = useState(false);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,21 +24,7 @@ const CTASection: React.FC = () => {
       return;
     }
     
-    setLoading(true);
-    
-    try {
-      // Redirect to auth page instead of directly calling the service
-      navigate('/auth');
-    } catch (error) {
-      console.error('Error submitting early access:', error);
-      toast({
-        variant: "destructive",
-        title: "Submission failed",
-        description: "There was an error submitting your request. Please try again.",
-      });
-    } finally {
-      setLoading(false);
-    }
+    setShowMicroform(true);
   };
 
   return (
@@ -73,9 +59,8 @@ const CTASection: React.FC = () => {
           <Button 
             type="submit" 
             className="w-full sm:w-auto bg-pocuro-blue hover:bg-opacity-90 text-white px-8"
-            disabled={loading}
           >
-            {loading ? "Processing..." : "Get Early Access"}
+            Get Early Access
           </Button>
         </form>
         
@@ -90,6 +75,11 @@ const CTASection: React.FC = () => {
           </Link>
           .
         </p>
+
+        <MicroformDialog 
+          open={showMicroform} 
+          onOpenChange={setShowMicroform}
+        />
       </div>
     </section>
   );

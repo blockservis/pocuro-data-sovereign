@@ -13,7 +13,7 @@ interface NavbarActionsProps {
 
 export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({ 
   toggleTheme, 
-  isDarkMode, 
+  isDarkMode,
   handleGetEarlyAccess 
 }) => {
   const { t } = useLanguage();
