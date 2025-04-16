@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
@@ -5,10 +6,13 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { MailIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { MicroformDialog } from '@/components/MicroformDialog';
+import { useLanguage } from '@/components/LanguageProvider';
 
 const CareersContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [showMicroform, setShowMicroform] = useState(false);
+  const { t } = useLanguage();
   
   const handleGetNotified = () => {
     setShowMicroform(true);
@@ -19,11 +23,11 @@ const CareersContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24 pb-16">
-        {/* Hero section */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 text-white py-20 px-4">
+        {/* Hero section - Updated to match Home page style */}
+        <section className="bg-gradient-to-r from-pocuro-blue to-pocuro-light-blue dark:from-pocuro-dark-navy dark:to-pocuro-blue text-white py-16 px-4">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Join the Privacy Revolution</h1>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-8">
+            <p className="text-xl opacity-90 max-w-3xl mx-auto">
               Build the future of personal data sovereignty with us.
             </p>
           </div>

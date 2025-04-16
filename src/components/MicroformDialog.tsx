@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,17 +14,36 @@ interface MicroformDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   preSelectedOption?: string;
+  initialEmail?: string;
+  initialName?: string;
 }
 
-export function MicroformDialog({ open, onOpenChange, preSelectedOption }: MicroformDialogProps) {
+export function MicroformDialog({ 
+  open, 
+  onOpenChange, 
+  preSelectedOption,
+  initialEmail = '',
+  initialName = ''
+}: MicroformDialogProps) {
   const [step, setStep] = useState(1);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(initialName);
+  const [email, setEmail] = useState(initialEmail);
   const [contributionTypes, setContributionTypes] = useState<string[]>(
     preSelectedOption ? [preSelectedOption] : []
   );
   const [feedback, setFeedback] = useState('');
   const { toast } = useToast();
+
+  // Update form when props change
+  useEffect(() => {
+    if (initialEmail) setEmail(initialEmail);
+    if (initialName) setName(initialName);
+    if (preSelectedOption && !contributionTypes.includes(preSelectedOption)) {
+      setContributionTypes(prev => 
+        prev.includes(preSelectedOption) ? prev : [...prev, preSelectedOption]
+      );
+    }
+  }, [initialEmail, initialName, preSelectedOption]);
 
   const progress = (step / 3) * 100;
 
@@ -67,13 +86,12 @@ export function MicroformDialog({ open, onOpenChange, preSelectedOption }: Micro
 
   const handleSubmit = async () => {
     try {
-      const { error } = await supabase.from('user_intents').insert([
-        {
-          email,
-          contribution_type: contributionTypes,
-          comments: feedback,
-        }
-      ]);
+      // Fixed: Use an object, not an array for insert
+      const { error } = await supabase.from('user_intents').insert({
+        email,
+        contribution_type: contributionTypes, 
+        comments: feedback
+      });
 
       if (error) throw error;
 
@@ -89,6 +107,7 @@ export function MicroformDialog({ open, onOpenChange, preSelectedOption }: Micro
       setContributionTypes(preSelectedOption ? [preSelectedOption] : []);
       setFeedback('');
     } catch (error) {
+      console.error("Form submission error:", error);
       toast({
         variant: "destructive",
         title: "Error",

@@ -61,8 +61,8 @@ const BlogContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24">
-        {/* Hero section - Updated style to be more natural */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white py-16 px-4 shadow-lg">
+        {/* Hero section - Updated to match home page style */}
+        <section className="bg-gradient-to-r from-pocuro-blue to-pocuro-light-blue dark:from-pocuro-dark-navy dark:to-pocuro-blue text-white py-16 px-4">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Pocuro Blog</h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
@@ -72,7 +72,7 @@ const BlogContent: React.FC = () => {
         </section>
         
         {/* Blog posts */}
-        <section className="py-16 px-4 bg-white dark:bg-gray-900">
+        <section className="py-16 px-4 bg-white dark:bg-pocuro-dark-navy">
           <div className="max-w-6xl mx-auto">
             <Tabs defaultValue="All" className="mb-12">
               <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:flex flex-wrap gap-2 mb-8">

@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, CalendarIcon, Clock, User, Tag } from 'lucide-react';
 import { fetchBlogPost, BlogPost as BlogPostType } from '@/services/blogService';
-import ReactMarkdown from 'react-markdown';
 
 const BlogPostContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -92,18 +91,9 @@ const BlogPostContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
       
       <main className="flex-grow pt-24 pb-16">
-        {/* Hero section */}
-        <section className="relative h-96 bg-gray-900 overflow-hidden">
-          <div className="absolute inset-0">
-            <img 
-              src={post.featured_image} 
-              alt={post.title} 
-              className="w-full h-full object-cover opacity-50"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-gray-900/70"></div>
-          </div>
-          
-          <div className="relative h-full max-w-5xl mx-auto px-4 flex flex-col justify-end pb-16">
+        {/* Hero section - Updated to match home page style */}
+        <section className="bg-gradient-to-r from-pocuro-blue to-pocuro-light-blue dark:from-pocuro-dark-navy dark:to-pocuro-blue text-white py-16 px-4">
+          <div className="max-w-5xl mx-auto px-4">
             <div className="flex items-center gap-2 mb-4">
               <Link 
                 to="/blog" 
@@ -122,7 +112,7 @@ const BlogPostContent: React.FC = () => {
               {post.title}
             </h1>
             
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-200">
               <div className="flex items-center gap-1">
                 <User size={16} />
                 <span>{post.author}</span>
@@ -149,9 +139,8 @@ const BlogPostContent: React.FC = () => {
             <Card className="border-none shadow-md">
               <CardContent className="p-8">
                 <div className="prose prose-lg dark:prose-invert prose-blue max-w-none">
-                  <ReactMarkdown>
-                    {post.content}
-                  </ReactMarkdown>
+                  {/* Render HTML content safely */}
+                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
               </CardContent>
             </Card>

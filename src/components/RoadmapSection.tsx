@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Rocket, Users, TrendingUp, Lock, RefreshCw, Heart, FileText, Shield } from 'lucide-react';
+import { Rocket, Users, TrendingUp, Lock, Book, Shield } from 'lucide-react';
 
 const roadmapItems = [
   {
@@ -15,7 +15,7 @@ const roadmapItems = [
     id: 2,
     title: "PocuroBiz MVP Launch",
     description: "Launching the ERP platform for small businesses with core modules and AI-powered automation.",
-    quarter: "End of Q2 2025",
+    quarter: "End of Q3 2025",
     status: "planned",
     icon: TrendingUp,
   },
@@ -23,36 +23,20 @@ const roadmapItems = [
     id: 3,
     title: "PocuroMe MVP Launch",
     description: "Introducing our privacy-first personal planner with foundational modules and local-first AI.",
-    quarter: "End of Q3 2025",
+    quarter: "End of Q2 2025",
     status: "planned",
     icon: Lock,
   },
   {
     id: 4,
-    title: "Cross-Device Sync",
-    description: "Optional syncing across your devices with full end-to-end encryption.",
-    quarter: "Q3 2025",
+    title: "AI Literacy & Community Empowerment",
+    description: "Launching our education initiative to build a supportive community around AI automation, digital privacy, and security. Empowering users with the knowledge to confidently navigate the modern tech landscape.",
+    quarter: "Q2 2025",
     status: "planned",
-    icon: RefreshCw,
+    icon: Book,
   },
   {
     id: 5,
-    title: "Health Tracking Module",
-    description: "Privacy-focused wellness tracking, with insights powered by local AI.",
-    quarter: "Q4 2025",
-    status: "planned",
-    icon: Heart,
-  },
-  {
-    id: 6,
-    title: "Document Scanner Upgrade",
-    description: "Smarter document handling with AI categorization and OCR support.",
-    quarter: "Q4 2025",
-    status: "planned",
-    icon: FileText,
-  },
-  {
-    id: 7,
     title: "Mobile & Desktop App",
     description: "Progressive Web App first. Full desktop privacy suite comes with our secure Tauri build.",
     quarter: "Post-MVP",
