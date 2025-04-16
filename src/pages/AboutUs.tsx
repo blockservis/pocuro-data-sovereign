@@ -258,7 +258,7 @@ const AboutUsContent: React.FC = () => {
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-3">
                   Questions about our products or services
                 </p>
-                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">info@pocuro.com</p>
+                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">info@pocuro.ai</p>
               </div>
               
               <div className="bg-white dark:bg-pocuro-dark-slate rounded-xl p-6 shadow-md">
@@ -266,7 +266,7 @@ const AboutUsContent: React.FC = () => {
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-3">
                   Press and media requests
                 </p>
-                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">press@pocuro.com</p>
+                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">press@pocuro.ai</p>
               </div>
               
               <div className="bg-white dark:bg-pocuro-dark-slate rounded-xl p-6 shadow-md">
@@ -274,7 +274,7 @@ const AboutUsContent: React.FC = () => {
                 <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-3">
                   Technical support and help
                 </p>
-                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">support@pocuro.com</p>
+                <p className="text-pocuro-blue dark:text-pocuro-aqua-blue font-medium">support@pocuro.ai</p>
               </div>
             </div>
           </div>

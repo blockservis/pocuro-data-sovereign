@@ -32,6 +32,7 @@ export function MicroformDialog({
     preSelectedOption ? [preSelectedOption] : []
   );
   const [feedback, setFeedback] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   // Update form when props change
@@ -86,17 +87,35 @@ export function MicroformDialog({
 
   const handleSubmit = async () => {
     try {
-      // Insert into early_access_signups table
-      const { error: signupError } = await supabase
+      setIsSubmitting(true);
+      
+      // Check if email already exists in early_access_signups
+      const { data: existingSignups, error: checkError } = await supabase
         .from('early_access_signups')
-        .insert({
-          email,
-          name
-        });
+        .select('id')
+        .eq('email', email)
+        .maybeSingle();
+      
+      if (checkError) {
+        console.error("Error checking existing signup:", checkError);
+      }
+      
+      // If email doesn't exist, insert into early_access_signups
+      if (!existingSignups) {
+        const { error: signupError } = await supabase
+          .from('early_access_signups')
+          .insert({
+            email,
+            name
+          });
 
-      if (signupError) throw signupError;
+        if (signupError) {
+          console.error("Signup insertion error:", signupError);
+          // Continue anyway to add the user intent
+        }
+      }
 
-      // Insert into user_intents table with NULL for user_id since we're not authenticated
+      // Insert into user_intents table
       const { error: intentError } = await supabase
         .from('user_intents')
         .insert({
@@ -106,7 +125,10 @@ export function MicroformDialog({
           user_id: 'anonymous' // Use a placeholder value since null isn't allowed
         });
 
-      if (intentError) throw intentError;
+      if (intentError) {
+        console.error("Intent insertion error:", intentError);
+        throw intentError;
+      }
 
       toast({
         title: "Success!",
@@ -119,6 +141,7 @@ export function MicroformDialog({
       setEmail('');
       setContributionTypes(preSelectedOption ? [preSelectedOption] : []);
       setFeedback('');
+      
     } catch (error) {
       console.error("Form submission error:", error);
       toast({
@@ -126,6 +149,8 @@ export function MicroformDialog({
         title: "Error",
         description: "Failed to submit your response. Please try again."
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -217,8 +242,9 @@ export function MicroformDialog({
             </Button>
             <Button
               onClick={step === 3 ? handleSubmit : handleNext}
+              disabled={isSubmitting}
             >
-              {step === 3 ? 'Submit' : 'Next'}
+              {step === 3 ? (isSubmitting ? 'Submitting...' : 'Submit') : 'Next'}
             </Button>
           </div>
         </div>
