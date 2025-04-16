@@ -1,5 +1,6 @@
 
 import { supabase } from '@/integrations/supabase/client';
+import type { Tables } from '@/integrations/supabase/types';
 
 export interface Testimonial {
   id: string;
@@ -15,21 +16,18 @@ export interface Testimonial {
 
 export async function getTestimonials() {
   try {
-    // Using a type assertion to handle the Supabase type mismatch
-    // This is safe because we know our table structure matches the Testimonial interface
+    // Use the Tables type from Supabase to ensure type safety
     const { data, error } = await supabase
       .from('testimonials')
       .select('*')
-      .order('created_at', { ascending: false }) as { 
-        data: Testimonial[] | null; 
-        error: any;
-      };
+      .order('created_at', { ascending: false });
     
     if (error) {
       throw error;
     }
     
-    return data || [];
+    // Map Supabase table type to our Testimonial interface
+    return (data || []) as Testimonial[];
   } catch (error) {
     console.error('Error fetching testimonials:', error);
     return [];
