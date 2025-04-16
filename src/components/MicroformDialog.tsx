@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -36,7 +35,6 @@ export function MicroformDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  // Update form when props change
   useEffect(() => {
     if (initialEmail) setEmail(initialEmail);
     if (initialName) setName(initialName);
@@ -90,10 +88,6 @@ export function MicroformDialog({
     try {
       setIsSubmitting(true);
       
-      // Generate a unique ID for the user since we don't have auth
-      const userId = uuidv4();
-      
-      // Check if email already exists in early_access_signups
       const { data: existingSignups, error: checkError } = await supabase
         .from('early_access_signups')
         .select('id')
@@ -104,7 +98,6 @@ export function MicroformDialog({
         console.error("Error checking existing signup:", checkError);
       }
       
-      // If email doesn't exist, insert into early_access_signups
       if (!existingSignups) {
         const { error: signupError } = await supabase
           .from('early_access_signups')
@@ -115,18 +108,15 @@ export function MicroformDialog({
 
         if (signupError) {
           console.error("Signup insertion error:", signupError);
-          // Continue anyway to add the user intent
         }
       }
 
-      // Insert into user_intents table with generated user_id
       const { error: intentError } = await supabase
         .from('user_intents')
         .insert({
           email,
           contribution_type: contributionTypes,
-          comments: feedback,
-          user_id: userId
+          comments: feedback
         });
 
       if (intentError) {

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +7,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from '@/integrations/supabase/client';
-import { v4 as uuidv4 } from 'uuid';
 
 const IntentForm: React.FC = () => {
   const [contributionType, setContributionType] = useState<string[]>(["I want to use the product"]);
@@ -22,17 +20,13 @@ const IntentForm: React.FC = () => {
     setLoading(true);
 
     try {
-      // Generate a unique ID for the user since we don't have auth
-      const userId = uuidv4();
-      
-      // Insert to user_intents table with generated user_id
+      // Insert to user_intents table without user_id
       const { data, error } = await supabase
         .from('user_intents')
         .insert({
           email,
           contribution_type: contributionType,
-          comments,
-          user_id: userId
+          comments
         });
 
       if (error) {

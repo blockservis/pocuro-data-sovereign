@@ -223,7 +223,7 @@ export type Database = {
           email: string
           id: string
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           comments?: string | null
@@ -232,7 +232,7 @@ export type Database = {
           email: string
           id?: string
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           comments?: string | null
@@ -241,7 +241,7 @@ export type Database = {
           email?: string
           id?: string
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
