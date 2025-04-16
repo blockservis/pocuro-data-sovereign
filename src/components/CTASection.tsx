@@ -20,7 +20,10 @@ const formSchema = z.object({
 
 const CTASection: React.FC = () => {
   const [showMicroform, setShowMicroform] = useState(false);
-  const [formValues, setFormValues] = useState({ name: '', email: '' });
+  const [formValues, setFormValues] = useState<{ name: string; email: string }>({ 
+    name: '', 
+    email: '' 
+  });
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,7 +35,10 @@ const CTASection: React.FC = () => {
   });
   
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    setFormValues(values);
+    setFormValues({
+      name: values.name,
+      email: values.email
+    });
     setShowMicroform(true);
   };
 

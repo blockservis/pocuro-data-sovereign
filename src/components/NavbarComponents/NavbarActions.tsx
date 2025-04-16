@@ -9,17 +9,23 @@ import { MicroformDialog } from '../MicroformDialog';
 interface NavbarActionsProps {
   toggleTheme: () => void;
   isDarkMode: boolean;
+  handleGetEarlyAccess?: () => void;
 }
 
 export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({ 
   toggleTheme, 
-  isDarkMode
+  isDarkMode,
+  handleGetEarlyAccess
 }) => {
   const { t } = useLanguage();
   const [showMicroform, setShowMicroform] = useState(false);
   
-  const handleGetEarlyAccess = () => {
-    setShowMicroform(true);
+  const handleClick = () => {
+    if (handleGetEarlyAccess) {
+      handleGetEarlyAccess();
+    } else {
+      setShowMicroform(true);
+    }
   };
   
   return (
@@ -33,7 +39,7 @@ export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({
       
       <Button 
         className="bg-pocuro-blue hover:bg-opacity-90 text-white"
-        onClick={handleGetEarlyAccess}
+        onClick={handleClick}
       >
         Get Early Access
       </Button>
@@ -49,13 +55,18 @@ export const DesktopNavbarActions: React.FC<NavbarActionsProps> = ({
 export const MobileNavbarActions: React.FC<NavbarActionsProps & { setMobileMenuOpen: (isOpen: boolean) => void }> = ({ 
   toggleTheme, 
   isDarkMode, 
-  setMobileMenuOpen
+  setMobileMenuOpen,
+  handleGetEarlyAccess
 }) => {
   const [showMicroform, setShowMicroform] = useState(false);
   
-  const handleGetEarlyAccess = () => {
+  const handleClick = () => {
     setMobileMenuOpen(false);
-    setShowMicroform(true);
+    if (handleGetEarlyAccess) {
+      handleGetEarlyAccess();
+    } else {
+      setShowMicroform(true);
+    }
   };
   
   return (
@@ -63,7 +74,7 @@ export const MobileNavbarActions: React.FC<NavbarActionsProps & { setMobileMenuO
       <li className="pt-4">
         <Button 
           className="w-full bg-pocuro-blue hover:bg-opacity-90 text-white"
-          onClick={handleGetEarlyAccess}
+          onClick={handleClick}
         >
           Get Early Access
         </Button>

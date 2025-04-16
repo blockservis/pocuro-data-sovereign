@@ -1,10 +1,18 @@
 
 import React from 'react';
-import { Rocket, Users, TrendingUp, Lock, Book, Shield } from 'lucide-react';
+import { Book, Rocket, Shield, TrendingUp, Users } from 'lucide-react';
 
 const roadmapItems = [
   {
     id: 1,
+    title: "AI Literacy Community Formation",
+    description: "Establishment of a grassroots education hub to share ideas, spark collaboration, and grow a values-driven AI community grounded in care, privacy, and purposeful automation.",
+    quarter: "Q2 2025",
+    status: "planned",
+    icon: Book,
+  },
+  {
+    id: 2,
     title: "ERP Pilot Program",
     description: "Invitation-only onboarding for early businesses ahead of our enterprise launch.",
     quarter: "Q2 2025",
@@ -12,28 +20,20 @@ const roadmapItems = [
     icon: Users,
   },
   {
-    id: 2,
-    title: "PocuroBiz MVP Launch",
+    id: 3,
+    title: "PocuroMe (PRP) MVP Launch",
+    description: "Introducing our privacy-first personal planner with foundational modules and local-first AI.",
+    quarter: "End of Q2 2025",
+    status: "planned",
+    icon: Rocket,
+  },
+  {
+    id: 4,
+    title: "PocuroBiz (ERP) MVP Launch",
     description: "Launching the ERP platform for small businesses with core modules and AI-powered automation.",
     quarter: "End of Q3 2025",
     status: "planned",
     icon: TrendingUp,
-  },
-  {
-    id: 3,
-    title: "PocuroMe MVP Launch",
-    description: "Introducing our privacy-first personal planner with foundational modules and local-first AI.",
-    quarter: "End of Q2 2025",
-    status: "planned",
-    icon: Lock,
-  },
-  {
-    id: 4,
-    title: "AI Literacy & Community Empowerment",
-    description: "Launching our education initiative to build a supportive community around AI automation, digital privacy, and security. Empowering users with the knowledge to confidently navigate the modern tech landscape.",
-    quarter: "Q2 2025",
-    status: "planned",
-    icon: Book,
   },
   {
     id: 5,

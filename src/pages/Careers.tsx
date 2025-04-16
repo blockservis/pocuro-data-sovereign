@@ -18,6 +18,13 @@ const CareersContent: React.FC = () => {
     setShowMicroform(true);
   };
   
+  const scrollToOpportunities = () => {
+    const opportunitiesSection = document.getElementById('opportunities-section');
+    if (opportunitiesSection) {
+      opportunitiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
@@ -34,7 +41,7 @@ const CareersContent: React.FC = () => {
         </section>
         
         {/* Coming Soon section */}
-        <section className="py-24 px-4">
+        <section className="py-24 px-4" id="opportunities-section">
           <div className="max-w-4xl mx-auto text-center">
             <div className="relative mb-12">
               <div className="absolute inset-0 flex items-center">
@@ -53,11 +60,14 @@ const CareersContent: React.FC = () => {
               </h2>
               
               <div className="mb-10">
-                <div className="inline-block animate-bounce bg-pocuro-blue rounded-full p-4 text-white mb-6">
+                <button 
+                  onClick={scrollToOpportunities} 
+                  className="inline-block animate-bounce bg-pocuro-blue rounded-full p-4 text-white mb-6 cursor-pointer"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
-                </div>
+                </button>
               </div>
               
               <p className="text-xl mb-10 text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-2xl mx-auto">
@@ -96,13 +106,15 @@ const CareersContent: React.FC = () => {
                 </ul>
               </div>
               
-              <Button 
-                className="bg-pocuro-blue hover:bg-opacity-90 text-white flex items-center gap-2"
-                onClick={handleGetNotified}
-              >
-                <MailIcon size={18} />
-                <span>Get notified about opportunities</span>
-              </Button>
+              <div className="flex justify-center">
+                <Button 
+                  className="bg-pocuro-blue hover:bg-opacity-90 text-white flex items-center gap-2"
+                  onClick={handleGetNotified}
+                >
+                  <MailIcon size={18} />
+                  <span>Get notified about opportunities</span>
+                </Button>
+              </div>
             </div>
           </div>
         </section>

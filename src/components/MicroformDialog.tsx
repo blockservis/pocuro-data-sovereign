@@ -86,10 +86,10 @@ export function MicroformDialog({
 
   const handleSubmit = async () => {
     try {
-      // Fixed: Use an object, not an array for insert
+      // Insert into user_intents table
       const { error } = await supabase.from('user_intents').insert({
-        email,
-        contribution_type: contributionTypes, 
+        email: email,
+        contribution_type: contributionTypes,
         comments: feedback
       });
 
