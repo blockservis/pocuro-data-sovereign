@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { v4 as uuidv4 } from 'uuid';
 
 const IntentForm: React.FC = () => {
-  const [contributionType, setContributionType] = useState<[string, ...string[]]>(["I want to use the product"]);
+  const [contributionType, setContributionType] = useState<string[]>(["I want to use the product"]);
   const [email, setEmail] = useState('');
   const [comments, setComments] = useState('');
   const [loading, setLoading] = useState(false);
@@ -71,8 +72,8 @@ const IntentForm: React.FC = () => {
         : [...prev, value];
       
       return newTypes.length > 0 
-        ? (newTypes as [string, ...string[]]) 
-        : ["I want to use the product"] as [string, ...string[]];
+        ? newTypes 
+        : ["I want to use the product"];
     });
   };
 
