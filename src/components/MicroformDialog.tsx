@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Label } from "@/components/ui/label";
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
+import { v4 as uuidv4 } from 'uuid';
 
 interface MicroformDialogProps {
   open: boolean;
@@ -89,6 +90,9 @@ export function MicroformDialog({
     try {
       setIsSubmitting(true);
       
+      // Generate a unique ID for the user since we don't have auth
+      const userId = uuidv4();
+      
       // Check if email already exists in early_access_signups
       const { data: existingSignups, error: checkError } = await supabase
         .from('early_access_signups')
@@ -115,13 +119,14 @@ export function MicroformDialog({
         }
       }
 
-      // Insert directly into user_intents without user_id
+      // Insert into user_intents table with generated user_id
       const { error: intentError } = await supabase
         .from('user_intents')
         .insert({
           email,
           contribution_type: contributionTypes,
-          comments: feedback
+          comments: feedback,
+          user_id: userId
         });
 
       if (intentError) {
