@@ -62,12 +62,12 @@ const BlogContent: React.FC = () => {
       
       <main className="flex-grow pt-24">
         {/* Header section - updated to match FAQ style */}
-        <section className="py-16 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
+        <section className="py-16 px-4 md:px-8 bg-deep-blue text-white">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Pocuro Blog
             </h1>
-            <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Insights and updates on privacy-first technologies, personal data management, and more.
             </p>
           </div>

@@ -57,6 +57,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))"
         },
+        "deep-blue": "hsl(var(--deep-blue))",
         pocuro: {
           blue: "#2196F3",
           "aqua-blue": "#4FC3F7",

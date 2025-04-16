@@ -39,15 +39,15 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   };
   
   return (
-    <header className="w-full py-4 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy border-b border-pocuro-light-gray dark:border-pocuro-dark-slate fixed top-0 z-50">
+    <header className="w-full py-4 px-4 md:px-8 bg-deep-blue text-white border-b border-pocuro-light-gray/10 fixed top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img 
-            src={isDarkMode ? "/lovable-uploads/b51bfe97-8e2b-4e28-96cd-b054392494f0.png" : "/lovable-uploads/37d086a4-c6cc-4a20-bbf6-f396cd5e9636.png"} 
+            src="/lovable-uploads/b51bfe97-8e2b-4e28-96cd-b054392494f0.png" 
             alt="Pocuro Logo" 
             className="h-10 w-auto"
           />
-          <span className="text-2xl font-bold text-pocuro-charcoal dark:text-white">Pocuro</span>
+          <span className="text-2xl font-bold text-white">Pocuro</span>
         </Link>
         
         {!isMobile ? (
@@ -62,11 +62,11 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
         ) : (
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
-            <Button variant="outline" size="icon" onClick={toggleTheme}>
+            <Button variant="outline" size="icon" onClick={toggleTheme} className="border-white/20 text-white hover:bg-white/10">
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             
-            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white hover:bg-white/10">
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
       
       {/* Mobile menu */}
       {isMobile && mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white dark:bg-pocuro-dark-navy border-b border-pocuro-light-gray dark:border-pocuro-dark-slate p-4 shadow-lg">
+        <div className="absolute top-full left-0 w-full bg-deep-blue border-b border-pocuro-light-gray/10 p-4 shadow-lg">
           <MobileNavigationMenu 
             scrollToSection={scrollToSection} 
             setMobileMenuOpen={setMobileMenuOpen}
