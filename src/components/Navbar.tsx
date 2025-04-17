@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   };
   
   return (
-    <header className="w-full py-4 px-4 md:px-8 bg-deep-blue text-white fixed top-0 z-50">
+    <header className={`w-full py-4 px-4 md:px-8 fixed top-0 z-50 ${isDarkMode ? 'bg-[#1a1f2d] text-white' : 'bg-white text-black shadow-sm'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img 
@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
             alt="Pocuro Logo" 
             className="h-10 w-auto"
           />
-          <span className="text-2xl font-bold text-white">Pocuro</span>
+          <span className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Pocuro</span>
         </Link>
         
         {!isMobile ? (
@@ -61,11 +61,11 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
         ) : (
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
-            <Button variant="outline" size="icon" onClick={toggleTheme} className="border-white/20 text-white hover:bg-white/10">
+            <Button variant="outline" size="icon" onClick={toggleTheme} className={isDarkMode ? "border-white/20 text-white hover:bg-white/10" : "border-gray-200 text-black hover:bg-gray-100"}>
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             
-            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white hover:bg-white/10">
+            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={isDarkMode ? "text-white hover:bg-white/10" : "text-black hover:bg-gray-100"}>
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
       
       {/* Mobile menu */}
       {isMobile && mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-deep-blue border-b border-white/10 p-4 shadow-lg">
+        <div className={`absolute top-full left-0 w-full p-4 shadow-lg ${isDarkMode ? 'bg-[#1a1f2d] border-b border-white/10' : 'bg-white border-b border-gray-200'}`}>
           <MobileNavigationMenu 
             scrollToSection={scrollToSection} 
             setMobileMenuOpen={setMobileMenuOpen}

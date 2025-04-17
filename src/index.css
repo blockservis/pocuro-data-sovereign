@@ -86,6 +86,20 @@
   }
 }
 
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white;
+  }
+  
+  .section-subtitle {
+    @apply text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto mb-8;
+  }
+  
+  .feature-card {
+    @apply bg-white dark:bg-pocuro-dark-navy rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-lg;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -119,15 +133,14 @@
   
   /* Color utilities */
   .bg-deep-blue {
-    @apply dark:bg-[#1a1f2d] bg-[#1a1f2d];
+    @apply dark:bg-[#1a1f2d] bg-white;
   }
   
   .text-deep-blue {
-    @apply dark:text-[#1a1f2d] text-[#1a1f2d];
+    @apply dark:text-[#1a1f2d] text-black;
   }
   
   .border-deep-blue {
-    @apply dark:border-[#1a1f2d] border-[#1a1f2d];
+    @apply dark:border-[#1a1f2d] border-gray-200;
   }
 }
-

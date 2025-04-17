@@ -24,8 +24,10 @@ const BenefitsSection: React.FC = () => {
   return (
     <section className="py-20 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
       <div className="max-w-7xl mx-auto">
-        <h2 className="section-title text-center">Why a Privacy-First?</h2>
-        <p className="section-subtitle text-center">
+        <h2 className="section-title text-center text-pocuro-charcoal dark:text-white">
+          Why a Privacy-First?
+        </h2>
+        <p className="section-subtitle text-center text-pocuro-slate-gray dark:text-pocuro-cool-gray">
           In today's digital world, privacy isn't just a feature—it's a necessity.
         </p>
         

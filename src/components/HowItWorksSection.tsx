@@ -33,8 +33,10 @@ const HowItWorksSection: React.FC = () => {
   return (
     <section id="how-it-works" className="py-20 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy">
       <div className="max-w-7xl mx-auto">
-        <h2 className="section-title text-center">How It Works</h2>
-        <p className="section-subtitle text-center">
+        <h2 className="section-title text-center text-pocuro-charcoal dark:text-white">
+          How It Works
+        </h2>
+        <p className="section-subtitle text-center text-pocuro-slate-gray dark:text-pocuro-cool-gray">
           Getting started with Pocuro is simple and secure.
         </p>
         

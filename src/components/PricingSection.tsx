@@ -134,10 +134,23 @@ const PricingSection: React.FC = () => {
           />
         </div>
         
+        <div className="mt-16 max-w-3xl mx-auto p-6 border border-dashed border-pocuro-blue/30 dark:border-pocuro-blue/20 rounded-xl bg-pocuro-blue/5 dark:bg-pocuro-blue/10">
+          <h3 className="text-2xl font-bold text-pocuro-charcoal dark:text-white mb-3">Enterprise</h3>
+          <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
+            Need a custom solution with advanced security features and dedicated support?
+          </p>
+          <Button 
+            variant="outline" 
+            className="border-pocuro-blue text-pocuro-blue hover:bg-pocuro-blue/10"
+            onClick={scrollToForm}
+          >
+            Contact Us for Custom Pricing
+          </Button>
+        </div>
+        
         <div className="mt-12 max-w-3xl mx-auto">
           <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-            All plans include local-first processing, zero-knowledge encryption, and our privacy-first commitment. 
-            Need a custom solution for your business? <a href="#" className="text-pocuro-blue underline">Contact us</a>.
+            All plans include local-first processing, zero-knowledge encryption, and our privacy-first commitment.
           </p>
         </div>
       </div>

@@ -30,8 +30,10 @@ const FeaturesSection: React.FC = () => {
   return (
     <section id="features" className="py-20 px-4 md:px-8 bg-pocuro-soft-white dark:bg-pocuro-deep-charcoal">
       <div className="max-w-7xl mx-auto">
-        <h2 className="section-title text-center">Core Features</h2>
-        <p className="section-subtitle text-center">
+        <h2 className="section-title text-center text-pocuro-charcoal dark:text-white">
+          Core Features
+        </h2>
+        <p className="section-subtitle text-center text-pocuro-slate-gray dark:text-pocuro-cool-gray">
           All the tools you need to organize your life, with privacy at the core.
         </p>
         

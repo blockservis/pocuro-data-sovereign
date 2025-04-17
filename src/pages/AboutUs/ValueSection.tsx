@@ -25,7 +25,7 @@ const ValueSection: React.FC = () => {
     {
       icon: <Shield className="h-6 w-6 text-pocuro-blue" />,
       title: "Privacy by Design",
-      description: "We don't just add privacy—we start with it. Every feature begins with the question: "How can we make this private by default?""
+      description: "We don't just add privacy—we start with it. Every feature begins with the question: \"How can we make this private by default?\""
     },
     {
       icon: <Lock className="h-6 w-6 text-pocuro-blue" />,

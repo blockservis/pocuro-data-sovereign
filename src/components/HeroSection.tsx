@@ -14,9 +14,10 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  // Fixed image URLs for both light and dark modes
   const heroImage = theme === 'dark' 
     ? "/lovable-uploads/83bd9e99-b2ad-45ce-a501-abd59ed6775e.png" 
-    : "/lovable-uploads/ca99a085-1159-4397-b177-e097d915665.png";
+    : "/lovable-uploads/ca99a085-1159-4397-b177-e9097d915a65.png";
 
   return (
     <section className="pt-36 pb-16 px-4 md:px-8 bg-background" id="hero">

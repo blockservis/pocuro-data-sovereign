@@ -3,16 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  image: string;
-}
-
 const TeamSection: React.FC = () => {
-  // Reduced team members from 4 to 2 as requested
-  const teamMembers: TeamMember[] = [
+  const teamMembers = [
     {
       name: "Alex Chen",
       role: "Founder & CEO",
@@ -26,7 +18,7 @@ const TeamSection: React.FC = () => {
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     }
   ];
-  
+
   return (
     <section className="py-16 px-4 bg-white dark:bg-pocuro-dark-navy">
       <div className="max-w-6xl mx-auto">
