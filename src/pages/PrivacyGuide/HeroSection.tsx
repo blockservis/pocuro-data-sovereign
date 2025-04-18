@@ -12,7 +12,7 @@ const HeroSection: React.FC = () => {
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Privacy Guide
         </h1>
-        <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
+        <p className={`text-xl max-w-3xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
           Understanding how Pocuro protects your privacy at every step.
         </p>
       </div>

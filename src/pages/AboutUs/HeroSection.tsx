@@ -14,7 +14,7 @@ const HeroSection: React.FC = () => {
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Our Mission
         </h1>
-        <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto mb-8`}>
+        <p className={`text-xl max-w-3xl mx-auto mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
           We're building a world where your personal data belongs to you—not corporations.
           Pocuro empowers individuals to plan, protect, and grow using AI—without sacrificing privacy, agency, or peace of mind.
         </p>
@@ -22,10 +22,15 @@ const HeroSection: React.FC = () => {
           <Button asChild size="lg" className="bg-pocuro-blue hover:bg-opacity-90 text-white">
             <Link to="/careers">Join Our Team</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className={isDarkMode 
-            ? "border-white/20 text-white hover:bg-white/10" 
-            : "border-gray-300 text-gray-800 hover:bg-gray-100"
-          }>
+          <Button 
+            asChild 
+            size="lg" 
+            variant="outline" 
+            className={isDarkMode 
+              ? "border-white/20 text-white hover:bg-white/10" 
+              : "border-gray-300 text-gray-800 hover:bg-gray-100"
+            }
+          >
             <Link to="/privacy-guide">Our Privacy Approach</Link>
           </Button>
         </div>

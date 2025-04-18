@@ -16,6 +16,7 @@ const BlogContent: React.FC = () => {
   const [categories, setCategories] = useState<string[]>(["All"]);
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const isDarkMode = theme === 'dark';
   
   useEffect(() => {
     async function loadBlogData() {
@@ -58,16 +59,16 @@ const BlogContent: React.FC = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar toggleTheme={toggleTheme} isDarkMode={theme === 'dark'} />
+      <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       
       <main className="flex-grow pt-24">
-        {/* Header section - updated to match FAQ style */}
-        <section className="py-16 px-4 md:px-8 bg-deep-blue text-white">
+        {/* Header section - updated with proper text colors */}
+        <section className={`py-16 px-4 md:px-8 ${isDarkMode ? 'bg-[#1a1f2d]' : 'bg-gray-50'}`}>
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <h1 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Pocuro Blog
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl max-w-3xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Insights and updates on privacy-first technologies, personal data management, and more.
             </p>
           </div>
