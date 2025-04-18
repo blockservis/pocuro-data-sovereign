@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -32,6 +33,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     
     // Save preference to localStorage
     localStorage.setItem('theme', theme);
+    
+    console.log('Theme toggled to:', theme); // Debug logging
   }, [theme]);
 
   const toggleTheme = () => {

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -18,6 +17,8 @@ const BlogContent: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const isDarkMode = theme === 'dark';
   
+  console.log('Blog - Current theme:', theme); // Debug logging
+  
   useEffect(() => {
     async function loadBlogData() {
       try {
@@ -30,7 +31,6 @@ const BlogContent: React.FC = () => {
         }
         
         if (categoriesResponse.success) {
-          // Fix the typing issue by ensuring we're setting string[] and not unknown[]
           if (Array.isArray(categoriesResponse.data)) {
             setCategories(categoriesResponse.data as string[]);
           }
@@ -62,19 +62,17 @@ const BlogContent: React.FC = () => {
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       
       <main className="flex-grow pt-24">
-        {/* Header section - updated with proper text colors */}
         <section className={`py-16 px-4 md:px-8 ${isDarkMode ? 'bg-[#1a1f2d]' : 'bg-gray-50'}`}>
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
               Pocuro Blog
             </h1>
-            <p className={`text-xl max-w-3xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
               Insights and updates on privacy-first technologies, personal data management, and more.
             </p>
           </div>
         </section>
         
-        {/* Blog posts */}
         <section className="py-16 px-4 bg-white dark:bg-pocuro-dark-navy">
           <div className="max-w-6xl mx-auto">
             <Tabs defaultValue="All" className="mb-12">
