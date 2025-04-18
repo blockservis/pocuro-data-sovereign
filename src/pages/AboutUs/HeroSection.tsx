@@ -9,7 +9,7 @@ const HeroSection: React.FC = () => {
   const isDarkMode = theme === 'dark';
   
   return (
-    <section className={`py-16 px-4 md:px-8 ${isDarkMode ? 'bg-[#1a1f2d] text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <section className={`py-16 px-4 md:px-8 ${isDarkMode ? 'bg-[#1a1f2d]' : 'bg-gray-50'}`}>
       <div className="max-w-6xl mx-auto text-center">
         <h1 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Our Mission
@@ -22,7 +22,10 @@ const HeroSection: React.FC = () => {
           <Button asChild size="lg" className="bg-pocuro-blue hover:bg-opacity-90 text-white">
             <Link to="/careers">Join Our Team</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className={isDarkMode ? "border-white/20 text-white hover:bg-white/10" : "border-gray-300 text-gray-800 hover:bg-gray-100"}>
+          <Button asChild size="lg" variant="outline" className={isDarkMode 
+            ? "border-white/20 text-white hover:bg-white/10" 
+            : "border-gray-300 text-gray-800 hover:bg-gray-100"
+          }>
             <Link to="/privacy-guide">Our Privacy Approach</Link>
           </Button>
         </div>
