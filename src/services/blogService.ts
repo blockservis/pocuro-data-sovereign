@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { Blog } from '@/types/supabase';
 
@@ -7,8 +6,7 @@ export type BlogPost = Blog;
 export async function fetchBlogPosts() {
   try {
     console.log('Fetching blog posts...');
-    // Use 'any' to override TypeScript's types for now
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('blogs')
       .select('*')
       .order('published_at', { ascending: false });
@@ -33,7 +31,7 @@ export async function fetchBlogPosts() {
 export async function fetchBlogPost(slug: string) {
   try {
     console.log(`Fetching blog post with slug: ${slug}`);
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('blogs')
       .select('*')
       .eq('slug', slug)
@@ -59,7 +57,7 @@ export async function fetchBlogPost(slug: string) {
 export async function fetchBlogCategories() {
   try {
     console.log('Fetching blog categories...');
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('blogs')
       .select('category');
     
@@ -69,7 +67,7 @@ export async function fetchBlogCategories() {
     }
     
     // Extract unique categories
-    const categories = ['All', ...new Set(data.map((item: any) => item.category))];
+    const categories = ['All', ...new Set(data.map(item => item.category))];
     console.log('Fetched blog categories:', categories);
     
     return { success: true, data: categories };
@@ -187,7 +185,7 @@ Community-Powered Feedback: Our roadmap evolves with your needs. Join our early 
     ];
     
     for (const post of blogPosts) {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await supabase
         .from('blogs')
         .upsert({
           ...post,
