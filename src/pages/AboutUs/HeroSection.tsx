@@ -6,7 +6,7 @@ import { useTheme } from '@/components/ThemeProvider';
 
 const HeroSection: React.FC = () => {
   const { theme } = useTheme();
-  const isDarkMode = theme;
+  const isDarkMode = theme === 'dark';
   
   return (
     <section className={`py-16 px-4 md:px-8 ${isDarkMode ? 'bg-[#1a1f2d] text-white' : 'bg-gray-50 text-gray-900'}`}>
