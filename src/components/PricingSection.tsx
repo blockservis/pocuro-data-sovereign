@@ -3,67 +3,39 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 
-interface PricingTierProps {
-  title: string;
-  description: string;
-  price: string;
-  isPopular?: boolean;
-  features: string[];
-  buttonText: string;
-  buttonVariant?: 'default' | 'outline';
-  onButtonClick?: () => void;
+interface PlanToggleProps {
+  activeTab: 'personal' | 'teams';
+  onChange: (tab: 'personal' | 'teams') => void;
 }
 
-const PricingTier: React.FC<PricingTierProps> = ({
-  title,
-  description,
-  price,
-  isPopular,
-  features,
-  buttonText,
-  buttonVariant = 'default',
-  onButtonClick
-}) => {
-  return (
-    <div className={`border rounded-xl shadow-sm p-8 ${
-      isPopular ? 'border-pocuro-blue/70 dark:border-pocuro-blue/50 ring-1 ring-pocuro-blue/30 dark:ring-pocuro-blue/20' : 'border-border'
-    }`}>
-      {isPopular && (
-        <div className="py-1.5 px-4 rounded-full text-xs font-semibold bg-pocuro-blue/10 text-pocuro-blue dark:bg-pocuro-blue/20 w-fit mb-5">
-          Most Popular
-        </div>
-      )}
-      <div>
-        <h3 className="text-2xl font-bold">{title}</h3>
-        <p className="text-muted-foreground mt-2 min-h-[40px]">{description}</p>
-        <div className="mt-5">
-          <div className="text-3xl font-bold">{price}</div>
-        </div>
-        <ul className="mt-8 space-y-3">
-          {features.map((feature, index) => (
-            <li key={index} className="flex items-center">
-              <Check className="text-pocuro-blue h-5 w-5 mr-3 flex-shrink-0" />
-              <span className="text-sm">{feature}</span>
-            </li>
-          ))}
-        </ul>
-        <Button
-          className={`mt-8 w-full ${
-            buttonVariant === 'default' 
-              ? 'bg-pocuro-blue hover:bg-pocuro-blue/90 text-white' 
-              : 'bg-transparent border-pocuro-blue/20 text-pocuro-charcoal dark:text-white hover:bg-pocuro-blue/10'
-          }`}
-          variant={buttonVariant}
-          onClick={onButtonClick}
-        >
-          {buttonText}
-        </Button>
-      </div>
-    </div>
-  );
-};
+const PlanToggle: React.FC<PlanToggleProps> = ({ activeTab, onChange }) => (
+  <div className="flex justify-center gap-4 mb-12">
+    <button
+      onClick={() => onChange('personal')}
+      className={`px-6 py-2 rounded-lg transition-all ${
+        activeTab === 'personal' 
+          ? 'bg-gray-900 text-white dark:bg-gray-800' 
+          : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+      }`}
+    >
+      PocuroMe (Personal)
+    </button>
+    <button
+      onClick={() => onChange('teams')}
+      className={`px-6 py-2 rounded-lg transition-all ${
+        activeTab === 'teams' 
+          ? 'bg-gray-900 text-white dark:bg-gray-800' 
+          : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+      }`}
+    >
+      PocuroBiz (Teams)
+    </button>
+  </div>
+);
 
 const PricingSection: React.FC = () => {
+  const [activeTab, setActiveTab] = React.useState<'personal' | 'teams'>('personal');
+
   const scrollToForm = () => {
     const form = document.getElementById('cta-section');
     if (form) {
@@ -71,87 +43,222 @@ const PricingSection: React.FC = () => {
     }
   };
 
+  const personalPlans = [
+    {
+      name: 'Starter',
+      description: 'For individuals getting started',
+      price: '$9',
+      period: '/month',
+      billing: 'Billed annually or 20% more monthly',
+      features: [
+        'Secure Document Vault',
+        'Daily Planner',
+        'Local AI Assistant',
+        'Private-by-default setup'
+      ]
+    },
+    {
+      name: 'Growth',
+      description: 'For power users and small teams',
+      price: '$14',
+      period: '/month',
+      billing: 'Billed annually or 20% more monthly',
+      isPopular: true,
+      features: [
+        'LifeCircle (Smart Contact Manager)',
+        'Digital ID Manager',
+        'Finance Manager',
+        'HealthBuddy',
+        'Offline Data Backup'
+      ]
+    },
+    {
+      name: 'Premium',
+      description: 'For organizations with custom needs',
+      price: '$49',
+      period: '/month',
+      billing: 'Billed annually or 20% more monthly',
+      features: [
+        'Full Encryption Vault',
+        'Personal Branding Kit',
+        'Monetization Coach',
+        'Premium AI Access',
+        'Auto Content Assistant'
+      ]
+    }
+  ];
+
+  const businessPlans = [
+    {
+      name: 'Starter (ERP)',
+      description: 'For small businesses',
+      price: '$49',
+      period: '/month',
+      billing: 'Per user, billed annually',
+      features: [
+        'Core ERP Modules',
+        'Basic Automations',
+        'Chat Assistant'
+      ]
+    },
+    {
+      name: 'Growth (ERP)',
+      description: 'For growing businesses',
+      price: '$129',
+      period: '/month',
+      billing: 'Per user, billed annually',
+      isPopular: true,
+      features: [
+        'CRM, Payroll, Inventory',
+        'Marketing Automation',
+        'Business Analytics'
+      ]
+    },
+    {
+      name: 'Premium (ERP)',
+      description: 'For enterprise needs',
+      price: '$499+',
+      period: '/month',
+      billing: 'Per user, billed annually',
+      features: [
+        'Advanced Compliance Modules',
+        'Custom Dashboards',
+        'Premium Support + Training',
+        'Advanced Integrations'
+      ]
+    }
+  ];
+
+  const currentPlans = activeTab === 'personal' ? personalPlans : businessPlans;
+  
   return (
-    <section className="py-20 px-4 md:px-8" id="pricing">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-pocuro-charcoal dark:text-white">
-          Simple, Transparent Pricing
+    <section className="py-20 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy" id="pricing">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          Choose the Right Plan for You
         </h2>
-        <p className="text-xl text-pocuro-slate-gray dark:text-pocuro-cool-gray max-w-3xl mx-auto mb-12">
-          Choose the plan that works best for your needs with our straightforward pricing.
+        <p className="text-xl text-center text-gray-600 dark:text-gray-300 mb-12">
+          Privacy-first solutions for individuals and teams of all sizes.
         </p>
-        
+
+        <PlanToggle activeTab={activeTab} onChange={setActiveTab} />
+
         <div className="grid md:grid-cols-3 gap-8">
-          <PricingTier 
-            title="Personal"
-            description="Perfect for individual users who value privacy."
-            price="Free"
-            buttonText="Get Started"
-            buttonVariant="outline"
-            onButtonClick={scrollToForm}
-            features={[
-              "Local-first data storage",
-              "Core productivity tools",
-              "Basic encrypted storage (2GB)",
-              "Personal calendar",
-              "Financial tracker",
-              "1 device"
-            ]}
-          />
-          
-          <PricingTier 
-            title="Pro"
-            description="Ideal for professionals managing multiple projects."
-            price="$9.99/mo"
-            isPopular={true}
-            buttonText="Get Started"
-            onButtonClick={scrollToForm}
-            features={[
-              "Everything in Personal",
-              "Advanced AI features",
-              "10GB encrypted storage",
-              "Document scanning",
-              "Smart templates",
-              "Up to 3 devices"
-            ]}
-          />
-          
-          <PricingTier 
-            title="Family"
-            description="Share securely with your family members."
-            price="$14.99/mo"
-            buttonText="Get Started"
-            buttonVariant="outline"
-            onButtonClick={scrollToForm}
-            features={[
-              "Everything in Pro",
-              "Up to 5 user accounts",
-              "50GB shared storage",
-              "Family calendar",
-              "Shared vault",
-              "Parental controls"
-            ]}
-          />
+          {currentPlans.map((plan, index) => (
+            <div 
+              key={index}
+              className={`relative p-8 rounded-xl ${
+                plan.isPopular 
+                  ? 'border-2 border-blue-500 dark:border-blue-400 bg-white dark:bg-gray-800/50' 
+                  : 'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30'
+              }`}
+            >
+              {plan.isPopular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{plan.name}</h3>
+                <p className="text-gray-500 dark:text-gray-400">{plan.description}</p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline">
+                  <span className="text-4xl font-bold text-gray-900 dark:text-white">{plan.price}</span>
+                  <span className="ml-1 text-gray-500 dark:text-gray-400">{plan.period}</span>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{plan.billing}</p>
+              </div>
+              <ul className="mb-8 space-y-4">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center text-gray-600 dark:text-gray-300">
+                    <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                onClick={scrollToForm}
+                className={`w-full ${
+                  plan.isPopular 
+                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                    : 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white'
+                }`}
+              >
+                {`Choose ${plan.name.split(' ')[0]}`}
+              </Button>
+            </div>
+          ))}
         </div>
-        
-        <div className="mt-16 max-w-3xl mx-auto p-6 border border-dashed border-pocuro-blue/30 dark:border-pocuro-blue/20 rounded-xl bg-pocuro-blue/5 dark:bg-pocuro-blue/10">
-          <h3 className="text-2xl font-bold text-pocuro-charcoal dark:text-white mb-3">Enterprise</h3>
-          <p className="text-pocuro-slate-gray dark:text-pocuro-cool-gray mb-6">
-            Need a custom solution with advanced security features and dedicated support?
-          </p>
-          <Button 
-            variant="outline" 
-            className="border-pocuro-blue text-pocuro-blue hover:bg-pocuro-blue/10"
-            onClick={scrollToForm}
-          >
-            Contact Us for Custom Pricing
-          </Button>
-        </div>
-        
-        <div className="mt-12 max-w-3xl mx-auto">
-          <p className="text-sm text-pocuro-slate-gray dark:text-pocuro-cool-gray">
-            All plans include local-first processing, zero-knowledge encryption, and our privacy-first commitment.
-          </p>
+
+        <div className="mt-16 p-8 rounded-xl bg-gray-800/95 dark:bg-gray-800/50 border border-gray-700">
+          <div className="flex items-center justify-between flex-col lg:flex-row gap-8">
+            <div>
+              <div className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium inline-block mb-4">
+                Enterprise Solution
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">
+                {activeTab === 'personal' ? 'Pocuro Infinite' : 'Pocuro Architect'}
+              </h3>
+              <p className="text-gray-300">
+                {activeTab === 'personal' 
+                  ? 'Take full control of your digital life—on your terms.'
+                  : 'Complete business automation for enterprises.'}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                {activeTab === 'personal' ? (
+                  <>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Bespoke AI Setup (MindMate)
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Custom Privacy + Security Advisory
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Tailored Automations per Module
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Device-to-device Offline Sync System
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Full-scale business automation
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      White-label Deployment
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Custom ERP Integrations
+                    </div>
+                    <div className="flex items-center text-gray-300">
+                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                      Legacy Migration & Support
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="text-center lg:text-right">
+              <h3 className="text-2xl font-bold text-white mb-4">Custom Quote</h3>
+              <Button
+                onClick={scrollToForm}
+                className="bg-blue-500 hover:bg-blue-600 text-white"
+              >
+                Contact Sales
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
