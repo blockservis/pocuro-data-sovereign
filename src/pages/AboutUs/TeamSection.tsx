@@ -6,15 +6,15 @@ import { Button } from '@/components/ui/button';
 const TeamSection: React.FC = () => {
   const teamMembers = [
     {
-      name: "Alex Chen",
-      role: "Founder & CEO",
-      bio: "Privacy advocate with 15+ years in security and user experience design.",
+      name: "Yazeed",
+      role: "Co-Founder",
+      bio: "Strategic operator with a background in pharmaceutical sciences and regulatory affairs. Leads business development with a privacy-first mission, drawing from years of corporate and consulting experience.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
-      name: "Sophia Rodriguez",
-      role: "CTO",
-      bio: "AI ethics researcher and systems architect specializing in privacy-preserving technologies.",
+      name: "Maariz",
+      role: "Co-Founder",
+      bio: "Engineer, blockchain and automation specialist with a foundation in Electrical and Biomedical Engineering. Designs Pocuro's AI infrastructure, focusing on secure, scalable software that protects user sovereignty.",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     }
   ];
