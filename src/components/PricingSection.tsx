@@ -2,39 +2,46 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 interface PlanToggleProps {
   activeTab: 'personal' | 'teams';
   onChange: (tab: 'personal' | 'teams') => void;
 }
 
-const PlanToggle: React.FC<PlanToggleProps> = ({ activeTab, onChange }) => (
-  <div className="flex justify-center gap-4 mb-12">
-    <button
-      onClick={() => onChange('personal')}
-      className={`px-6 py-2 rounded-lg transition-all ${
-        activeTab === 'personal' 
-          ? 'bg-gray-900 text-white dark:bg-gray-800' 
-          : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-      }`}
-    >
-      PocuroMe (Personal)
-    </button>
-    <button
-      onClick={() => onChange('teams')}
-      className={`px-6 py-2 rounded-lg transition-all ${
-        activeTab === 'teams' 
-          ? 'bg-gray-900 text-white dark:bg-gray-800' 
-          : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-      }`}
-    >
-      PocuroBiz (Teams)
-    </button>
-  </div>
-);
+const PlanToggle: React.FC<PlanToggleProps> = ({ activeTab, onChange }) => {
+  const { theme } = useTheme();
+  
+  return (
+    <div className="flex justify-center gap-4 mb-12">
+      <button
+        onClick={() => onChange('personal')}
+        className={`px-6 py-2 rounded-lg transition-all ${
+          activeTab === 'personal' 
+            ? 'bg-pocuro-blue text-white' 
+            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+        }`}
+      >
+        PocuroMe (Personal)
+      </button>
+      <button
+        onClick={() => onChange('teams')}
+        className={`px-6 py-2 rounded-lg transition-all ${
+          activeTab === 'teams' 
+            ? 'bg-pocuro-blue text-white' 
+            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+        }`}
+      >
+        PocuroBiz (Teams)
+      </button>
+    </div>
+  );
+};
 
 const PricingSection: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<'personal' | 'teams'>('personal');
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   const scrollToForm = () => {
     const form = document.getElementById('cta-section');
@@ -149,13 +156,13 @@ const PricingSection: React.FC = () => {
               key={index}
               className={`relative p-8 rounded-xl ${
                 plan.isPopular 
-                  ? 'border-2 border-blue-500 dark:border-blue-400 bg-white dark:bg-gray-800/50' 
+                  ? 'border-2 border-pocuro-blue bg-white dark:bg-gray-800/50' 
                   : 'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30'
               }`}
             >
               {plan.isPopular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-pocuro-blue text-white px-4 py-1 rounded-full text-sm font-medium">
                     Most Popular
                   </span>
                 </div>
@@ -183,7 +190,7 @@ const PricingSection: React.FC = () => {
                 onClick={scrollToForm}
                 className={`w-full ${
                   plan.isPopular 
-                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                    ? 'bg-pocuro-blue hover:bg-pocuro-blue/90 text-white' 
                     : 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white'
                 }`}
               >
@@ -193,16 +200,16 @@ const PricingSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 p-8 rounded-xl bg-gray-800/95 dark:bg-gray-800/50 border border-gray-700">
+        <div className="mt-16 p-8 rounded-xl bg-white border border-gray-200 dark:bg-gray-800/95 dark:border-gray-700">
           <div className="flex items-center justify-between flex-col lg:flex-row gap-8">
             <div>
-              <div className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium inline-block mb-4">
+              <div className="bg-pocuro-blue text-white px-4 py-1 rounded-full text-sm font-medium inline-block mb-4">
                 Enterprise Solution
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                 {activeTab === 'personal' ? 'Pocuro Infinite' : 'Pocuro Architect'}
               </h3>
-              <p className="text-gray-300">
+              <p className="text-gray-600 dark:text-gray-300">
                 {activeTab === 'personal' 
                   ? 'Take full control of your digital life—on your terms.'
                   : 'Complete business automation for enterprises.'}
@@ -210,39 +217,39 @@ const PricingSection: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                 {activeTab === 'personal' ? (
                   <>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Bespoke AI Setup (MindMate)
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Custom Privacy + Security Advisory
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Tailored Automations per Module
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Device-to-device Offline Sync System
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Full-scale business automation
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       White-label Deployment
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Custom ERP Integrations
                     </div>
-                    <div className="flex items-center text-gray-300">
-                      <Check className="h-5 w-5 text-blue-400 mr-3" />
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                      <Check className="h-5 w-5 text-pocuro-blue mr-3" />
                       Legacy Migration & Support
                     </div>
                   </>
@@ -250,10 +257,10 @@ const PricingSection: React.FC = () => {
               </div>
             </div>
             <div className="text-center lg:text-right">
-              <h3 className="text-2xl font-bold text-white mb-4">Custom Quote</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Custom Quote</h3>
               <Button
                 onClick={scrollToForm}
-                className="bg-blue-500 hover:bg-blue-600 text-white"
+                className="bg-pocuro-blue hover:bg-pocuro-blue/90 text-white"
               >
                 Contact Sales
               </Button>

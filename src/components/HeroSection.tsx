@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
     : "/lovable-uploads/ca99a085-1159-4397-b177-e9097d915a65.png";
 
   return (
-    <section className="pt-36 pb-16 px-4 md:px-8 bg-background" id="hero">
+    <section className="pt-36 pb-16 px-4 md:px-8 bg-white dark:bg-pocuro-dark-navy" id="hero">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
         <div className="animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pocuro-charcoal dark:text-white">

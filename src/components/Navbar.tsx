@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode }) => {
   };
   
   return (
-    <header className={`w-full py-4 px-4 md:px-8 fixed top-0 z-50 ${isDarkMode ? 'bg-[#1a1f2d] text-white' : 'bg-white text-black shadow-sm'}`}>
+    <header className={`w-full py-4 px-4 md:px-8 fixed top-0 z-50 transition-colors ${isDarkMode ? 'bg-[#1a1f2d] text-white' : 'bg-white text-black shadow-sm'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img 
